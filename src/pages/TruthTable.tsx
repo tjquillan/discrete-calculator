@@ -39,6 +39,9 @@ export const TruthTable = () => {
     window.navigator.clipboard.writeText(`${window.location.protocol}//${window.location.host}/truthtable/${value}`)
     setShareNotificationOpen(true)
   },[value])
+  const onShareClose = useCallback(() => {
+    setShareNotificationOpen(false)
+  },[])
 
   const process = useCallback(() => {
     if (mathfieldRef.current) {
@@ -67,7 +70,7 @@ export const TruthTable = () => {
           </Button>
         </Grid>
       </Grid>
-      <Notification message='Share link copied to clipboard!' severity='info' open={shareNotificationOpen} />
+      <Notification message='Share link copied to clipboard!' severity='info' open={shareNotificationOpen} onClose={onShareClose}/>
       <Divider />
       <div className={classes.table}>
         <LatexTable columns={columns} data={data} />
