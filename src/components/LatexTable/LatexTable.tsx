@@ -1,8 +1,8 @@
 import { Column, useTable } from "react-table"
 import { createStyles, makeStyles, Table, TableBody, TableCell, TableHead, TableRow } from "@material-ui/core"
 import TeX from "@matejmazur/react-katex"
-import "katex/dist/katex.min.css"
 import clsx from "clsx"
+import "katex/dist/katex.min.css"
 
 const useStyles = makeStyles((theme) =>
   createStyles({

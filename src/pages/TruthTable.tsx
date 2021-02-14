@@ -1,4 +1,4 @@
-import { Button, createStyles, Divider, Grid, makeStyles } from "@material-ui/core"
+import { Button, createStyles, Grid, makeStyles } from "@material-ui/core"
 import React, { useCallback, useEffect, useMemo, useRef, useState } from "react"
 import MathView, { MathViewRef } from "react-math-view"
 import { useParams } from "react-router-dom"
