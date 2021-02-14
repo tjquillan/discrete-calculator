@@ -1,22 +1,37 @@
 import { Column, useTable } from "react-table"
-import { Table, TableBody, TableCell, TableHead, TableRow } from "@material-ui/core"
-import TeX from '@matejmazur/react-katex';
-import 'katex/dist/katex.min.css';
+import { createStyles, makeStyles, Table, TableBody, TableCell, TableHead, TableRow } from "@material-ui/core"
+import TeX from "@matejmazur/react-katex"
+import "katex/dist/katex.min.css"
+import clsx from "clsx"
+
+const useStyles = makeStyles((theme) =>
+  createStyles({
+    headerCell: {
+      backgroundColor: theme.palette.grey[300]
+    },
+    tableCell: {
+      borderWidth: 2,
+      borderColor: theme.palette.grey[400],
+      borderStyle: "solid"
+    }
+  })
+)
 
 export const LatexTable = ({ columns, data }: { columns: Array<Column>; data: Array<any> }) => {
+  const classes = useStyles()
   const { getTableProps, headerGroups, rows, prepareRow } = useTable({
     columns,
-    data,
+    data
   })
 
   return (
-    <Table {...getTableProps()}>
+    <Table size="small" {...getTableProps()}>
       <TableHead>
-        {headerGroups.map(headerGroup => (
+        {headerGroups.map((headerGroup) => (
           <TableRow {...headerGroup.getHeaderGroupProps()}>
-            {headerGroup.headers.map(column => (
-              <TableCell {...column.getHeaderProps()}>
-                <TeX>{column.render('Header')}</TeX>
+            {headerGroup.headers.map((column) => (
+              <TableCell align="center" className={clsx(classes.tableCell, classes.headerCell)} {...column.getHeaderProps()}>
+                <TeX>{column.render("Header")}</TeX>
               </TableCell>
             ))}
           </TableRow>
@@ -27,9 +42,9 @@ export const LatexTable = ({ columns, data }: { columns: Array<Column>; data: Ar
           prepareRow(row)
           return (
             <TableRow {...row.getRowProps()}>
-              {row.cells.map(cell => {
+              {row.cells.map((cell) => {
                 return (
-                  <TableCell {...cell.getCellProps()}>
+                  <TableCell align="center" className={classes.tableCell} {...cell.getCellProps()}>
                     <TeX>{cell.value}</TeX>
                   </TableCell>
                 )

@@ -117,7 +117,6 @@ export const TruthTable = () => {
         </Grid>
       </Grid>
       <Notification {...notificationData} open={notificationOpen} onClose={onNotificationClose} />
-      <Divider />
       <div className={classes.table}>
         { error ?
           null :
