@@ -29,19 +29,27 @@ const useStyles = makeStyles((theme) =>
 )
 
 export const TruthTable = () => {
-  const {initialValue} = useParams<{initialValue?: string}>()
+  const { initialValue } = useParams<{ initialValue?: string }>()
   const classes = useStyles()
   const mathfieldRef = useRef<MathViewRef>(null)
   const [value, setValue] = useState<string>(initialValue ? initialValue : "r→q")
 
-  const [shareNotificationOpen, setShareNotificationOpen] = useState(false)
+  const [notificationData, setNotificationData] = useState<{
+    message: string
+    severity: "info" | "success" | "warning" | "error"
+  }>({
+    message: "",
+    severity: "info"
+  })
+  const [notificationOpen, setNotificationOpen] = useState(false)
   const onShareClick = useCallback(() => {
     window.navigator.clipboard.writeText(`${window.location.protocol}//${window.location.host}/truthtable/${value}`)
-    setShareNotificationOpen(true)
-  },[value])
-  const onShareClose = useCallback(() => {
-    setShareNotificationOpen(false)
-  },[])
+    setNotificationData({message: "Share link copied to clipboard!", severity: 'info'})
+    setNotificationOpen(true)
+  }, [value])
+  const onNotificationClose = useCallback(() => {
+    setNotificationOpen(false)
+  }, [])
 
   const process = useCallback(() => {
     if (mathfieldRef.current) {
@@ -49,9 +57,22 @@ export const TruthTable = () => {
     }
   }, [mathfieldRef])
 
+  const [error, setError] = useState(false)
+  const onError = useCallback(() => {
+    setError(true)
+    setNotificationData({message: 'Failed to parse proposition', severity: 'error'})
+    setNotificationOpen(true)
+  }, [])
   const [columns, data] = useMemo(() => {
-    return buildTable(value)
-  }, [value])
+    let output: any[] = []
+    try {
+      output = buildTable(value)
+      setError(false)
+    } catch {
+      onError()
+    }
+    return output
+  }, [onError, value])
 
   return (
     <>
@@ -70,10 +91,12 @@ export const TruthTable = () => {
           </Button>
         </Grid>
       </Grid>
-      <Notification message='Share link copied to clipboard!' severity='info' open={shareNotificationOpen} onClose={onShareClose}/>
+      <Notification {...notificationData} open={notificationOpen} onClose={onNotificationClose} />
       <Divider />
       <div className={classes.table}>
-        <LatexTable columns={columns} data={data} />
+        { error ?
+          null :
+          <LatexTable columns={columns} data={data} />}
       </div>
     </>
   )
