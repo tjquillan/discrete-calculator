@@ -38,21 +38,21 @@ export const TruthTable = () => {
     const ref = mathfieldRef.current
     if (ref) {
       ref.setOptions({
-        defaultMode: 'math',
+        defaultMode: "math",
         smartMode: false,
         smartFence: false,
         macros: {},
         inlineShortcuts: {
-          '->': '\\to',
-          '<->': '\\leftrightarrow',
-          iff: '\\leftrightarrow',
-          if: '\\to',
-          implies: '\\to',
-          to: '\\to',
-          not: '\\neg',
-          and: '\\wedge',
-          or: '\\vee',
-          xor: '\\oplus'
+          "->": "\\to",
+          "<->": "\\leftrightarrow",
+          iff: "\\leftrightarrow",
+          if: "\\to",
+          implies: "\\to",
+          to: "\\to",
+          not: "\\neg",
+          and: "\\wedge",
+          or: "\\vee",
+          xor: "\\oplus"
         }
       })
     }
@@ -68,7 +68,7 @@ export const TruthTable = () => {
   const [notificationOpen, setNotificationOpen] = useState(false)
   const onShareClick = useCallback(() => {
     window.navigator.clipboard.writeText(`${window.location.protocol}//${window.location.host}/truthtable/${value}`)
-    setNotificationData({message: "Share link copied to clipboard!", severity: 'info'})
+    setNotificationData({ message: "Share link copied to clipboard!", severity: "info" })
     setNotificationOpen(true)
   }, [value])
   const onNotificationClose = useCallback(() => {
@@ -85,7 +85,7 @@ export const TruthTable = () => {
   const onError = useCallback((error: Error) => {
     setError(true)
     console.error(error)
-    setNotificationData({message: `Failed to parse proposition. See console for details`, severity: 'error'})
+    setNotificationData({ message: `Failed to parse proposition. See console for details`, severity: "error" })
     setNotificationOpen(true)
   }, [])
   const [columns, data] = useMemo(() => {
@@ -117,11 +117,7 @@ export const TruthTable = () => {
         </Grid>
       </Grid>
       <Notification {...notificationData} open={notificationOpen} onClose={onNotificationClose} />
-      <div className={classes.table}>
-        { error ?
-          null :
-          <LatexTable columns={columns} data={data} />}
-      </div>
+      <div className={classes.table}>{error ? null : <LatexTable columns={columns} data={data} />}</div>
     </>
   )
 }

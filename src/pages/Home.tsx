@@ -3,8 +3,8 @@ import { createStyles, makeStyles, Typography } from "@material-ui/core"
 const useStyles = makeStyles((theme) =>
   createStyles({
     root: {
-      justifyContent: 'center',
-      textAlign: 'center'
+      justifyContent: "center",
+      textAlign: "center"
     }
   })
 )

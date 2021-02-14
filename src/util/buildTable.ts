@@ -1,10 +1,10 @@
-import { Column } from "react-table";
-import { evaluate, getVars, parse } from "./parser/truthtable";
-import { Results } from "./parser/truthtable/ast";
+import { Column } from "react-table"
+import { evaluate, getVars, parse } from "./parser/truthtable"
+import { Results } from "./parser/truthtable/ast"
 
 // asciimath2tex has no type defintion
 // @ts-ignore 7016
-import AsciiMathParser from 'asciimath2tex';
+import AsciiMathParser from "asciimath2tex"
 
 /**
  * Genetates a boolean matrix
@@ -14,16 +14,16 @@ import AsciiMathParser from 'asciimath2tex';
  * @param n Number of columns
  */
 function boolMatrix(n: number) {
-  var mat = [];
-  (function _boolMatrix(set: boolean[], c) {
-    if(c === 0) {
+  var mat = []
+  ;(function _boolMatrix(set: boolean[], c) {
+    if (c === 0) {
       mat.push(set)
       return
     }
-    _boolMatrix(set.concat([true]), c - 1);
-    _boolMatrix(set.concat([false]), c - 1);
-  })([], n);
-  return mat;
+    _boolMatrix(set.concat([true]), c - 1)
+    _boolMatrix(set.concat([false]), c - 1)
+  })([], n)
+  return mat
 }
 
 function generateValues(vars: Array<string>) {
@@ -37,7 +37,7 @@ function generateValues(vars: Array<string>) {
 }
 
 export function buildTable(proposition: string): [Array<Column>, Array<any>] {
-  const asciiParser = new AsciiMathParser();
+  const asciiParser = new AsciiMathParser()
   const columns: Array<Column> = []
   const data = []
 
@@ -57,7 +57,7 @@ export function buildTable(proposition: string): [Array<Column>, Array<any>] {
       }
     }
 
-    const transformedResults: {[id: string]: string} = {}
+    const transformedResults: { [id: string]: string } = {}
     Object.keys(results).forEach((value) => {
       const boolValue = results[value]
       transformedResults[value] = boolValue ? "T" : "F"

@@ -30,7 +30,11 @@ export const LatexTable = ({ columns, data }: { columns: Array<Column>; data: Ar
         {headerGroups.map((headerGroup) => (
           <TableRow {...headerGroup.getHeaderGroupProps()}>
             {headerGroup.headers.map((column) => (
-              <TableCell align="center" className={clsx(classes.tableCell, classes.headerCell)} {...column.getHeaderProps()}>
+              <TableCell
+                align="center"
+                className={clsx(classes.tableCell, classes.headerCell)}
+                {...column.getHeaderProps()}
+              >
                 <TeX>{column.render("Header")}</TeX>
               </TableCell>
             ))}

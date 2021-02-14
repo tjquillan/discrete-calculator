@@ -46,7 +46,7 @@ const useStyles = makeStyles((theme) =>
     },
     titleLink: {
       "&:hover": {
-        textDecoration: 'none'
+        textDecoration: "none"
       }
     }
   })

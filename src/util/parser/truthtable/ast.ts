@@ -31,19 +31,17 @@ export abstract class TruthTableNode {
   }
 
   public toString(): string {
-      return `${this.left}${this.symbol}${this.right}`
+    return `${this.left}${this.symbol}${this.right}`
   }
 }
 
 export class Atom extends TruthTableNode {
-  constructor(
-    symbol: string | null,
-    left: TruthTableNode | string,
-    right: TruthTableNode | null = null
-  ) { super(symbol, left, right)}
+  constructor(symbol: string | null, left: TruthTableNode | string, right: TruthTableNode | null = null) {
+    super(symbol, left, right)
+  }
 
   protected operator(): boolean {
-    throw new Error("This should not get called!");
+    throw new Error("This should not get called!")
   }
 
   public toString() {

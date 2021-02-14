@@ -2,27 +2,30 @@
  * The contents of this file were derrived from: https://codesandbox.io/s/ku5mv?file=/demo.tsx:597-681
  */
 
-import { ListItemText } from "@material-ui/core";
-import { ListItem, ListItemIcon } from "@material-ui/core";
-import React, { forwardRef, useMemo } from "react";
-import { Link as RouterLink, LinkProps as RouterLinkProps, NavLink as RouterNavLink, NavLinkProps as RouterNavLinkProps } from 'react-router-dom';
+import { ListItemText } from "@material-ui/core"
+import { ListItem, ListItemIcon } from "@material-ui/core"
+import React, { forwardRef, useMemo } from "react"
+import {
+  Link as RouterLink,
+  LinkProps as RouterLinkProps,
+  NavLink as RouterNavLink,
+  NavLinkProps as RouterNavLinkProps
+} from "react-router-dom"
 
 interface ListItemLinkProps {
-  icon?: React.ReactElement;
-  primary: string;
-  to: string;
+  icon?: React.ReactElement
+  primary: string
+  to: string
 }
 
 export const ListItemLink = (props: ListItemLinkProps) => {
-  const { icon, primary, to } = props;
+  const { icon, primary, to } = props
 
   const renderLink = useMemo(
     () =>
-      forwardRef<any, Omit<RouterLinkProps, 'to'>>((itemProps, ref) => (
-        <RouterLink to={to} ref={ref} {...itemProps} />
-      )),
-    [to],
-  );
+      forwardRef<any, Omit<RouterLinkProps, "to">>((itemProps, ref) => <RouterLink to={to} ref={ref} {...itemProps} />),
+    [to]
+  )
 
   return (
     <li>
@@ -31,23 +34,23 @@ export const ListItemLink = (props: ListItemLinkProps) => {
         <ListItemText primary={primary} />
       </ListItem>
     </li>
-  );
+  )
 }
 
 interface ListItemNavLinkProps extends ListItemLinkProps {
-  activeClassName?: string;
+  activeClassName?: string
 }
 
 export const ListItemNavLink = (props: ListItemNavLinkProps) => {
-  const { icon, primary, to, activeClassName } = props;
+  const { icon, primary, to, activeClassName } = props
 
   const renderNavLink = useMemo(
     () =>
-      forwardRef<any, Omit<RouterNavLinkProps, 'to'>>((itemProps, ref) => (
+      forwardRef<any, Omit<RouterNavLinkProps, "to">>((itemProps, ref) => (
         <RouterNavLink to={to} ref={ref} activeClassName={activeClassName} {...itemProps} />
       )),
-    [activeClassName, to],
-  );
+    [activeClassName, to]
+  )
 
   return (
     <li>
@@ -56,6 +59,5 @@ export const ListItemNavLink = (props: ListItemNavLinkProps) => {
         <ListItemText primary={primary} />
       </ListItem>
     </li>
-  );
+  )
 }
-
