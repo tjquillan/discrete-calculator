@@ -46,6 +46,7 @@ export const TruthTable = () => {
           '->': '\\to',
           '<->': '\\leftrightarrow',
           iff: '\\leftrightarrow',
+          if: '\\to',
           implies: '\\to',
           to: '\\to',
           not: '\\neg',
