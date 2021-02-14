@@ -4,7 +4,7 @@ import MathView, { MathViewRef } from "react-math-view"
 import { useParams } from "react-router-dom"
 import { LatexTable } from "../components/LatexTable"
 import { Notification } from "../components/Notification"
-import { buildTable } from "./buildTable"
+import { buildTable } from "../util/buildTable"
 
 const useStyles = makeStyles((theme) =>
   createStyles({

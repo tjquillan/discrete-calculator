@@ -13,6 +13,7 @@ import {
 import { BrowserRouter as Router, Link as RouterLink, Route, Switch } from "react-router-dom"
 import { ListItemNavLink } from "../ListItemLink"
 import { TruthTable } from "../../pages/TruthTable"
+import { Home } from "../../pages/Home"
 
 const drawerWidth = 240
 const useStyles = makeStyles((theme) =>
@@ -86,6 +87,9 @@ export const App = () => {
         <main className={classes.content}>
           <Toolbar />
           <Switch>
+            <Route exact path="/">
+              <Home />
+            </Route>
             <Route path="/truthtable/:initialValue?" component={TruthTable} />
           </Switch>
         </main>
