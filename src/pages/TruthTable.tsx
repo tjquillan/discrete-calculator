@@ -39,9 +39,11 @@ export const TruthTable = () => {
     if (ref) {
       ref.setOptions({
         defaultMode: 'math',
+        smartMode: false,
         smartFence: false,
+        macros: {},
         inlineShortcuts: {
-          ...ref.getOption('inlineShortcuts'),
+          '->': '\\to',
           '<->': '\\leftrightarrow',
           iff: '\\leftrightarrow',
           implies: '\\to',
