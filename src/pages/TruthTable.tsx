@@ -1,5 +1,5 @@
 import { Button, createStyles, Divider, Grid, makeStyles } from "@material-ui/core"
-import React, { useCallback, useMemo, useRef, useState } from "react"
+import React, { useCallback, useEffect, useMemo, useRef, useState } from "react"
 import MathView, { MathViewRef } from "react-math-view"
 import { useParams } from "react-router-dom"
 import { LatexTable } from "../components/LatexTable"
@@ -33,6 +33,27 @@ export const TruthTable = () => {
   const classes = useStyles()
   const mathfieldRef = useRef<MathViewRef>(null)
   const [value, setValue] = useState<string>(initialValue ? initialValue : "r→q")
+
+  useEffect(() => {
+    const ref = mathfieldRef.current
+    if (ref) {
+      ref.setOptions({
+        defaultMode: 'math',
+        smartFence: false,
+        inlineShortcuts: {
+          ...ref.getOption('inlineShortcuts'),
+          '<->': '\\leftrightarrow',
+          iff: '\\leftrightarrow',
+          implies: '\\to',
+          to: '\\to',
+          not: '\\neg',
+          and: '\\wedge',
+          or: '\\vee',
+          xor: '\\oplus'
+        }
+      })
+    }
+  }, [mathfieldRef])
 
   const [notificationData, setNotificationData] = useState<{
     message: string
