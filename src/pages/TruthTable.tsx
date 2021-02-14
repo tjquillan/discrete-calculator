@@ -58,9 +58,10 @@ export const TruthTable = () => {
   }, [mathfieldRef])
 
   const [error, setError] = useState(false)
-  const onError = useCallback(() => {
+  const onError = useCallback((error: Error) => {
     setError(true)
-    setNotificationData({message: 'Failed to parse proposition', severity: 'error'})
+    console.error(error)
+    setNotificationData({message: `Failed to parse proposition. See console for details`, severity: 'error'})
     setNotificationOpen(true)
   }, [])
   const [columns, data] = useMemo(() => {
@@ -68,8 +69,8 @@ export const TruthTable = () => {
     try {
       output = buildTable(value)
       setError(false)
-    } catch {
-      onError()
+    } catch (error) {
+      onError(error)
     }
     return output
   }, [onError, value])
