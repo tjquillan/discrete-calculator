@@ -1,7 +1,9 @@
 import { Button, createStyles, Divider, Grid, makeStyles } from "@material-ui/core"
 import React, { useCallback, useMemo, useRef, useState } from "react"
 import MathView, { MathViewRef } from "react-math-view"
+import { useParams } from "react-router-dom"
 import { LatexTable } from "../components/LatexTable"
+import { Notification } from "../components/Notification"
 import { buildTable } from "./buildTable"
 
 const useStyles = makeStyles((theme) =>
@@ -21,15 +23,22 @@ const useStyles = makeStyles((theme) =>
       paddingLeft: "10px"
     },
     table: {
-      justifyContent: 'center'
+      justifyContent: "center"
     }
   })
 )
 
 export const TruthTable = () => {
+  const {initialValue} = useParams<{initialValue?: string}>()
   const classes = useStyles()
   const mathfieldRef = useRef<MathViewRef>(null)
-  const [value, setValue] = useState<string>("p→q")
+  const [value, setValue] = useState<string>(initialValue ? initialValue : "r→q")
+
+  const [shareNotificationOpen, setShareNotificationOpen] = useState(false)
+  const onShareClick = useCallback(() => {
+    window.navigator.clipboard.writeText(`${window.location.protocol}//${window.location.host}/truthtable/${value}`)
+    setShareNotificationOpen(true)
+  },[value])
 
   const process = useCallback(() => {
     if (mathfieldRef.current) {
@@ -52,7 +61,13 @@ export const TruthTable = () => {
             Go
           </Button>
         </Grid>
+        <Grid item className={classes.button}>
+          <Button variant="contained" color="primary" onClick={onShareClick}>
+            Share
+          </Button>
+        </Grid>
       </Grid>
+      <Notification message='Share link copied to clipboard!' severity='info' open={shareNotificationOpen} />
       <Divider />
       <div className={classes.table}>
         <LatexTable columns={columns} data={data} />

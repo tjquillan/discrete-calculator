@@ -86,9 +86,7 @@ export const App = () => {
         <main className={classes.content}>
           <Toolbar />
           <Switch>
-            <Route path="/truthtable">
-              <TruthTable />
-            </Route>
+            <Route path="/truthtable/:initialValue?" component={TruthTable} />
           </Switch>
         </main>
       </Router>
