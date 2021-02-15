@@ -1,4 +1,4 @@
-import React, { useCallback } from "react"
+import React, { useCallback, useMemo } from "react"
 import {
   AppBar,
   createStyles,
@@ -62,11 +62,15 @@ export const App = () => {
     localStorage.setItem("darkMode", `${!darkMode}`)
     setDarkMode(!darkMode)
   }, [darkMode])
-  const theme = createMuiTheme({
-    palette: {
-      type: darkMode ? "dark" : "light"
-    }
-  })
+  const theme = useMemo(
+    () =>
+      createMuiTheme({
+        palette: {
+          type: darkMode ? "dark" : "light"
+        }
+      }),
+    [darkMode]
+  )
 
   return (
     <ThemeProvider theme={theme}>
