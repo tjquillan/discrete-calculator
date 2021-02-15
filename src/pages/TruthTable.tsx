@@ -1,5 +1,5 @@
 import { Button, createStyles, Divider, Grid, makeStyles, Typography } from "@material-ui/core"
-import React, { useCallback, useEffect, useMemo, useRef, useState } from "react"
+import React, { useCallback, useEffect, useRef, useState } from "react"
 import MathView, { MathViewRef } from "react-math-view"
 import { useParams } from "react-router-dom"
 import TeX from "@matejmazur/react-katex"
