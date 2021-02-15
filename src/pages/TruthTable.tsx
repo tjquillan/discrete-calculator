@@ -35,6 +35,12 @@ export const TruthTable = () => {
   const mathfieldRef = useRef<MathViewRef>(null)
   const [value, setValue] = useState<string>(initialValue ? initialValue : "r→q")
 
+  const process = useCallback(() => {
+    if (mathfieldRef.current) {
+      setValue(mathfieldRef.current.getValue("ASCIIMath"))
+    }
+  }, [mathfieldRef])
+
   useEffect(() => {
     const ref = mathfieldRef.current
     if (ref) {
@@ -54,10 +60,17 @@ export const TruthTable = () => {
           and: "\\wedge",
           or: "\\vee",
           xor: "\\oplus"
+        },
+        onKeystroke: (_sender, _keystroke, e) => {
+          if (e.code === "Enter") {
+            process()
+            return false
+          }
+          return true
         }
       })
     }
-  }, [mathfieldRef])
+  }, [mathfieldRef, process])
 
   const [notificationData, setNotificationData] = useState<{
     message: string
@@ -75,12 +88,6 @@ export const TruthTable = () => {
   const onNotificationClose = useCallback(() => {
     setNotificationOpen(false)
   }, [])
-
-  const process = useCallback(() => {
-    if (mathfieldRef.current) {
-      setValue(mathfieldRef.current.getValue("ASCIIMath"))
-    }
-  }, [mathfieldRef])
 
   const [error, setError] = useState(false)
   const onError = useCallback((error: Error) => {
