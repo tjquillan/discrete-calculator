@@ -1,4 +1,4 @@
-import React, { useCallback, useMemo } from "react"
+import React, { lazy, Suspense, useCallback, useMemo } from "react"
 import {
   AppBar,
   createStyles,
@@ -9,16 +9,18 @@ import {
   makeStyles,
   Toolbar,
   Typography,
-  IconButton
+  IconButton,
+  CircularProgress
 } from "@material-ui/core"
 import { BrowserRouter as Router, Link as RouterLink, Route, Switch } from "react-router-dom"
 import { ListItemNavLink } from "../ListItemLink"
-import { TruthTable } from "../../pages/TruthTable"
-import { Home } from "../../pages/Home"
 import { createMuiTheme, ThemeProvider } from "@material-ui/core/styles"
 import { useState } from "react"
 import Brightness7Icon from "@material-ui/icons/Brightness7"
 import Brightness4Icon from "@material-ui/icons/Brightness4"
+import Home from "../../pages/Home"
+
+const TruthTable = lazy(() => import("../../pages/TruthTable"))
 
 const drawerWidth = 240
 const useStyles = makeStyles((theme) =>
@@ -50,6 +52,10 @@ const useStyles = makeStyles((theme) =>
       "&:hover": {
         textDecoration: "none"
       }
+    },
+    loading: {
+      justifyContent: "center",
+      textAlign: "center"
     }
   })
 )
@@ -107,12 +113,19 @@ export const App = () => {
           </Drawer>
           <main className={classes.content}>
             <Toolbar />
-            <Switch>
-              <Route exact path="/">
-                <Home />
-              </Route>
-              <Route path="/truthtable/:initialValue?" component={TruthTable} />
-            </Switch>
+            <Suspense
+              fallback={
+                <div className={classes.loading}>
+                  <Typography variant="caption">Loading...</Typography>
+                  <CircularProgress />
+                </div>
+              }
+            >
+              <Switch>
+                <Route exact path="/" component={Home} />
+                <Route path="/truthtable/:initialValue?" component={TruthTable} />
+              </Switch>
+            </Suspense>
           </main>
         </Router>
       </div>

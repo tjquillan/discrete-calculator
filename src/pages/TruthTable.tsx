@@ -37,7 +37,7 @@ const useStyles = makeStyles((theme) =>
   })
 )
 
-export const TruthTable = () => {
+const TruthTable = () => {
   const { initialValue } = useParams<{ initialValue?: string }>()
   const classes = useStyles()
   const mathfieldRef = useRef<MathViewRef>(null)
@@ -182,3 +182,5 @@ export const TruthTable = () => {
     </>
   )
 }
+
+export default TruthTable
