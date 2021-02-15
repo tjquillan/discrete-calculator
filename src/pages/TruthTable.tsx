@@ -13,7 +13,8 @@ const useStyles = makeStyles((theme) =>
       paddingBottom: 30
     },
     mathfield: {
-      width: "25%",
+      minWidth: "25%",
+      maxWidth: "50%",
       fontSize: "32px",
       textAlign: "center",
       padding: "8px",
