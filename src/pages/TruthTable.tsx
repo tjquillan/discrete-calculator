@@ -97,7 +97,7 @@ export const TruthTable = () => {
     setNotificationOpen(false)
   }, [])
 
-  const [helpOpen, setHelpOpen] = useState(false)
+  const [helpOpen, setHelpOpen] = useState(true)
   const toggleHelp = useCallback(() => setHelpOpen(!helpOpen), [helpOpen])
 
   const [error, setError] = useState(false)
