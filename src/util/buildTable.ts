@@ -36,7 +36,7 @@ function generateValues(vars: Array<string>) {
   }, [])
 }
 
-export function buildTable(proposition: string): [Array<Column>, Array<any>] {
+export async function buildTable(proposition: string): Promise<[Array<Column>, Array<any>]> {
   const asciiParser = new AsciiMathParser()
   const columns: Array<Column> = []
   const data = []

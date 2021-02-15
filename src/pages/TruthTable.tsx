@@ -6,6 +6,7 @@ import TeX from "@matejmazur/react-katex"
 import { LatexTable } from "../components/LatexTable"
 import { Notification } from "../components/Notification"
 import { buildTable } from "../util/buildTable"
+import { Column } from "react-table"
 
 const useStyles = makeStyles((theme) =>
   createStyles({
@@ -107,15 +108,15 @@ const TruthTable = () => {
     setNotificationData({ message: `Failed to parse proposition. See console for details`, severity: "error" })
     setNotificationOpen(true)
   }, [])
-  const [columns, data] = useMemo(() => {
-    let output: any[] = []
-    try {
-      output = buildTable(value)
-      setError(false)
-    } catch (error) {
-      onError(error)
-    }
-    return output
+
+  const [[columns, data], setColumns] = useState<[Array<Column>, Array<any>]>([[], []])
+  useEffect(() => {
+    buildTable(value)
+      .then((table) => {
+        setColumns(table)
+        setError(false)
+      })
+      .catch((error) => onError(error))
   }, [onError, value])
 
   return (
