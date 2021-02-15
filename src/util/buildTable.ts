@@ -1,6 +1,6 @@
 import { Column } from "react-table"
-import { evaluate, getVars, parse } from "./parser/truthtable"
-import { Results } from "./parser/truthtable/ast"
+import { evaluate, getVars, parse } from "./parser/proposition"
+import { Results } from "./parser/proposition/ast"
 
 // asciimath2tex has no type defintion
 // @ts-ignore 7016
