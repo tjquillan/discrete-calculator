@@ -1,4 +1,4 @@
-import React from "react"
+import React, { useCallback } from "react"
 import {
   AppBar,
   createStyles,
@@ -8,12 +8,17 @@ import {
   List,
   makeStyles,
   Toolbar,
-  Typography
+  Typography,
+  IconButton
 } from "@material-ui/core"
 import { BrowserRouter as Router, Link as RouterLink, Route, Switch } from "react-router-dom"
 import { ListItemNavLink } from "../ListItemLink"
 import { TruthTable } from "../../pages/TruthTable"
 import { Home } from "../../pages/Home"
+import { createMuiTheme, ThemeProvider } from "@material-ui/core/styles"
+import { useState } from "react"
+import Brightness7Icon from "@material-ui/icons/Brightness7"
+import Brightness4Icon from "@material-ui/icons/Brightness4"
 
 const drawerWidth = 240
 const useStyles = makeStyles((theme) =>
@@ -39,10 +44,13 @@ const useStyles = makeStyles((theme) =>
       padding: theme.spacing(3)
     },
     active: {
-      background: theme.palette.grey[300],
+      background: theme.palette.type ? theme.palette.grey[300] : theme.palette.grey[700],
       "&:hover": {
-        background: theme.palette.grey[400]
+        background: theme.palette.grey[500]
       }
+    },
+    title: {
+      flexGrow: 1
     },
     titleLink: {
       "&:hover": {
@@ -55,45 +63,58 @@ const useStyles = makeStyles((theme) =>
 export const App = () => {
   const classes = useStyles()
 
+  const [darkMode, setDarkMode] = useState(false)
+  const toggleDarkMode = useCallback(() => setDarkMode(!darkMode), [darkMode])
+  const theme = createMuiTheme({
+    palette: {
+      type: darkMode ? "dark" : "light"
+    }
+  })
+
   return (
-    <div className={classes.root}>
-      <CssBaseline />
-      <Router>
-        <AppBar position="fixed" className={classes.appBar}>
-          <Toolbar>
-            <Typography variant="h6">
-              <Link component={RouterLink} to="/" color={"inherit"} className={classes.titleLink}>
-                Discrete Calculator
-              </Link>
-            </Typography>
-          </Toolbar>
-        </AppBar>
-        <Drawer
-          className={classes.drawer}
-          variant="permanent"
-          classes={{
-            paper: classes.drawerPaper
-          }}
-        >
-          <Toolbar />
-          <div className={classes.drawerContainer}>
-            <List>
-              <ListItemNavLink to="/truthtable" primary="Truth Tables" activeClassName={classes.active} />
-              {/* <ListItemNavLink to="/setprops" primary="Set Properties" activeClassName={classes.active} /> */}
-              {/* <ListItemNavLink to="/relations" primary="Relations" activeClassName={classes.active} /> */}
-            </List>
-          </div>
-        </Drawer>
-        <main className={classes.content}>
-          <Toolbar />
-          <Switch>
-            <Route exact path="/">
-              <Home />
-            </Route>
-            <Route path="/truthtable/:initialValue?" component={TruthTable} />
-          </Switch>
-        </main>
-      </Router>
-    </div>
+    <ThemeProvider theme={theme}>
+      <div className={classes.root}>
+        <CssBaseline />
+        <Router>
+          <AppBar position="fixed" className={classes.appBar}>
+            <Toolbar>
+              <Typography variant="h6" className={classes.title}>
+                <Link component={RouterLink} to="/" color={"inherit"} className={classes.titleLink}>
+                  Discrete Calculator
+                </Link>
+              </Typography>
+              <IconButton color="inherit" onClick={toggleDarkMode}>
+                {darkMode ? <Brightness4Icon /> : <Brightness7Icon />}
+              </IconButton>
+            </Toolbar>
+          </AppBar>
+          <Drawer
+            className={classes.drawer}
+            variant="permanent"
+            classes={{
+              paper: classes.drawerPaper
+            }}
+          >
+            <Toolbar />
+            <div className={classes.drawerContainer}>
+              <List>
+                <ListItemNavLink to="/truthtable" primary="Truth Tables" activeClassName={classes.active} />
+                {/* <ListItemNavLink to="/setprops" primary="Set Properties" activeClassName={classes.active} /> */}
+                {/* <ListItemNavLink to="/relations" primary="Relations" activeClassName={classes.active} /> */}
+              </List>
+            </div>
+          </Drawer>
+          <main className={classes.content}>
+            <Toolbar />
+            <Switch>
+              <Route exact path="/">
+                <Home />
+              </Route>
+              <Route path="/truthtable/:initialValue?" component={TruthTable} />
+            </Switch>
+          </main>
+        </Router>
+      </div>
+    </ThemeProvider>
   )
 }
