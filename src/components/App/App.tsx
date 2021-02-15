@@ -44,7 +44,7 @@ const useStyles = makeStyles((theme) =>
       padding: theme.spacing(3)
     },
     active: {
-      background: theme.palette.type ? theme.palette.grey[300] : theme.palette.grey[700],
+      background: theme.palette.grey[400],
       "&:hover": {
         background: theme.palette.grey[500]
       }
