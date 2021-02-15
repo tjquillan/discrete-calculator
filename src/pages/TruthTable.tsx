@@ -18,7 +18,9 @@ const useStyles = makeStyles((theme) =>
       fontSize: "32px",
       textAlign: "center",
       padding: "8px",
-      border: "1px solid rgba(0, 0, 0, .3)"
+      borderWidth: 2,
+      borderStyle: "solid",
+      borderColor: theme.palette.grey[400]
     },
     button: {
       paddingLeft: "10px"
