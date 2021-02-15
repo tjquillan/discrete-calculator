@@ -57,8 +57,11 @@ const useStyles = makeStyles((theme) =>
 export const App = () => {
   const classes = useStyles()
 
-  const [darkMode, setDarkMode] = useState(false)
-  const toggleDarkMode = useCallback(() => setDarkMode(!darkMode), [darkMode])
+  const [darkMode, setDarkMode] = useState(localStorage.getItem("darkMode") === "true")
+  const toggleDarkMode = useCallback(() => {
+    localStorage.setItem("darkMode", `${!darkMode}`)
+    setDarkMode(!darkMode)
+  }, [darkMode])
   const theme = createMuiTheme({
     palette: {
       type: darkMode ? "dark" : "light"
