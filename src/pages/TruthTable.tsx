@@ -21,7 +21,7 @@ const useStyles = makeStyles((theme) =>
       padding: "8px",
       borderWidth: 2,
       borderStyle: "solid",
-      borderColor: theme.palette.grey[400]
+      borderColor: theme.palette.divider
     },
     button: {
       paddingLeft: "10px"

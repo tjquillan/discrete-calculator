@@ -43,12 +43,6 @@ const useStyles = makeStyles((theme) =>
       flexGrow: 1,
       padding: theme.spacing(3)
     },
-    active: {
-      background: theme.palette.grey[400],
-      "&:hover": {
-        background: theme.palette.grey[500]
-      }
-    },
     title: {
       flexGrow: 1
     },
@@ -98,9 +92,9 @@ export const App = () => {
             <Toolbar />
             <div className={classes.drawerContainer}>
               <List>
-                <ListItemNavLink to="/truthtable" primary="Truth Tables" activeClassName={classes.active} />
-                {/* <ListItemNavLink to="/setprops" primary="Set Properties" activeClassName={classes.active} /> */}
-                {/* <ListItemNavLink to="/relations" primary="Relations" activeClassName={classes.active} /> */}
+                <ListItemNavLink to="/truthtable" primary="Truth Tables" />
+                {/* <ListItemNavLink to="/setprops" primary="Set Properties" /> */}
+                {/* <ListItemNavLink to="/relations" primary="Relations" /> */}
               </List>
             </div>
           </Drawer>

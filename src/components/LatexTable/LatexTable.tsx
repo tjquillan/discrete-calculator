@@ -7,11 +7,11 @@ import "katex/dist/katex.min.css"
 const useStyles = makeStyles((theme) =>
   createStyles({
     headerCell: {
-      backgroundColor: theme.palette.grey[500]
+      backgroundColor: theme.palette.divider
     },
     tableCell: {
       borderWidth: 2,
-      borderColor: theme.palette.grey[600],
+      borderColor: theme.palette.divider,
       borderStyle: "solid"
     }
   })

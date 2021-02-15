@@ -4,6 +4,7 @@
 
 import { ListItemText } from "@material-ui/core"
 import { ListItem, ListItemIcon } from "@material-ui/core"
+import clsx from "clsx"
 import React, { forwardRef, useMemo } from "react"
 import {
   Link as RouterLink,
@@ -47,7 +48,7 @@ export const ListItemNavLink = (props: ListItemNavLinkProps) => {
   const renderNavLink = useMemo(
     () =>
       forwardRef<any, Omit<RouterNavLinkProps, "to">>((itemProps, ref) => (
-        <RouterNavLink to={to} ref={ref} activeClassName={activeClassName} {...itemProps} />
+        <RouterNavLink to={to} ref={ref} activeClassName={clsx("Mui-selected", activeClassName)} {...itemProps} />
       )),
     [activeClassName, to]
   )
