@@ -1,7 +1,8 @@
-import { Button, createStyles, Grid, makeStyles } from "@material-ui/core"
+import { Button, createStyles, Divider, Grid, makeStyles, Typography } from "@material-ui/core"
 import React, { useCallback, useEffect, useMemo, useRef, useState } from "react"
 import MathView, { MathViewRef } from "react-math-view"
 import { useParams } from "react-router-dom"
+import TeX from "@matejmazur/react-katex"
 import { LatexTable } from "../components/LatexTable"
 import { Notification } from "../components/Notification"
 import { buildTable } from "../util/buildTable"
@@ -27,6 +28,11 @@ const useStyles = makeStyles((theme) =>
     },
     table: {
       justifyContent: "center"
+    },
+    help: {
+      justifyContent: "center",
+      textAlign: "center",
+      paddingBottom: 20
     }
   })
 )
@@ -91,6 +97,9 @@ export const TruthTable = () => {
     setNotificationOpen(false)
   }, [])
 
+  const [helpOpen, setHelpOpen] = useState(false)
+  const toggleHelp = useCallback(() => setHelpOpen(!helpOpen), [helpOpen])
+
   const [error, setError] = useState(false)
   const onError = useCallback((error: Error) => {
     setError(true)
@@ -125,9 +134,51 @@ export const TruthTable = () => {
             Share
           </Button>
         </Grid>
+        <Grid item className={classes.button}>
+          <Button variant="contained" color="primary" onClick={toggleHelp}>
+            Help
+          </Button>
+        </Grid>
       </Grid>
-      <Notification {...notificationData} open={notificationOpen} onClose={onNotificationClose} />
+      <div className={classes.help} hidden={helpOpen}>
+        <Divider />
+        <Typography variant="h6">Shortcuts:</Typography>
+        <Grid container alignItems="center" justify="center" spacing={2}>
+          <Grid item>
+            <Typography variant="h6">
+              not: <TeX>\neg</TeX>
+            </Typography>
+          </Grid>
+          <Grid item>
+            <Typography variant="h6">
+              and: <TeX>\wedge</TeX>
+            </Typography>
+          </Grid>
+          <Grid item>
+            <Typography variant="h6">
+              or: <TeX>\vee</TeX>
+            </Typography>
+          </Grid>
+          <Grid item>
+            <Typography variant="h6">
+              xor: <TeX>\oplus</TeX>
+            </Typography>
+          </Grid>
+          <Grid item>
+            <Typography variant="h6">
+              if: <TeX>\to</TeX>
+            </Typography>
+          </Grid>
+          <Grid item>
+            <Typography variant="h6">
+              iff: <TeX>\leftrightarrow</TeX>
+            </Typography>
+          </Grid>
+        </Grid>
+        <Divider />
+      </div>
       <div className={classes.table}>{error ? null : <LatexTable columns={columns} data={data} />}</div>
+      <Notification {...notificationData} open={notificationOpen} onClose={onNotificationClose} />
     </>
   )
 }
