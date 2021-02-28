@@ -229,32 +229,17 @@ const Sets = () => {
         <Grid container alignItems="center" justify="center" spacing={2}>
           <Grid item>
             <Typography variant="h6">
-              not: <TeX>\neg</TeX>
+              union: <TeX>\cup</TeX>
             </Typography>
           </Grid>
           <Grid item>
             <Typography variant="h6">
-              and: <TeX>\wedge</TeX>
+              inverse: <TeX>\cap</TeX>
             </Typography>
           </Grid>
           <Grid item>
             <Typography variant="h6">
-              or: <TeX>\vee</TeX>
-            </Typography>
-          </Grid>
-          <Grid item>
-            <Typography variant="h6">
-              xor: <TeX>\oplus</TeX>
-            </Typography>
-          </Grid>
-          <Grid item>
-            <Typography variant="h6">
-              if: <TeX>\to</TeX>
-            </Typography>
-          </Grid>
-          <Grid item>
-            <Typography variant="h6">
-              iff: <TeX>\leftrightarrow</TeX>
+              emptyset: <TeX>\emptyset</TeX>
             </Typography>
           </Grid>
         </Grid>
