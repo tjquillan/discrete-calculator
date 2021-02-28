@@ -52,7 +52,7 @@ const useStyles = makeStyles((theme) =>
 
 const Sets = () => {
   const classes = useStyles()
-  const setInputdRef = useRef<MathViewRef>(null)
+  const setInputRef = useRef<MathViewRef>(null)
   const exprInputRef = useRef<MathViewRef>(null)
   const [sets, setSets] = useState<{ [id: string]: string }>({})
   const [selectedSet, setSelectedSet] = useState<string>("")
@@ -66,7 +66,7 @@ const Sets = () => {
   const onRadioEditSelect = useCallback(() => setCurrentSet(sets[selectedSet]), [selectedSet, sets])
 
   const processSet = useCallback(() => {
-    const mathfield = setInputdRef.current
+    const mathfield = setInputRef.current
     if (mathfield) {
       const value = mathfield.getValue("latex-expanded")
       const key = value.split("=")[0]
@@ -84,14 +84,16 @@ const Sets = () => {
   }, [])
 
   useEffect(() => {
-    const mathfield = setInputdRef.current
+    const mathfield = setInputRef.current
     if (mathfield) {
       mathfield.setOptions({
         defaultMode: "math",
         smartMode: false,
         smartFence: false,
         macros: {},
-        inlineShortcuts: {},
+        inlineShortcuts: {
+          eset: "\\emptyset"
+        },
         onKeystroke: (_sender, _keystroke, e) => {
           if (e.code === "Enter") {
             processSet()
@@ -198,7 +200,7 @@ const Sets = () => {
             <Typography variant="h6">Set: </Typography>
           </Grid>
           <Grid item className={classes.mathfield}>
-            <MathView value={currentSet} ref={setInputdRef} />
+            <MathView value={currentSet} ref={setInputRef} />
           </Grid>
           <Grid item>
             <Typography variant="h6">Expression: </Typography>
@@ -253,7 +255,7 @@ const Sets = () => {
               </Grid>
               <Grid item>
                 <Typography variant="h6">
-                  inverse: <TeX>\cap</TeX>
+                  intersect: <TeX>\cap</TeX>
                 </Typography>
               </Grid>
             </Grid>
