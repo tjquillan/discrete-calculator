@@ -195,13 +195,13 @@ const Sets = () => {
           className={classes.mathfieldContainer}
         >
           <Grid item>
-            <Typography>Sets: </Typography>
+            <Typography variant="h6">Set: </Typography>
           </Grid>
           <Grid item className={classes.mathfield}>
             <MathView value={currentSet} ref={setInputdRef} />
           </Grid>
           <Grid item>
-            <Typography>Operations: </Typography>
+            <Typography variant="h6">Expression: </Typography>
           </Grid>
           <Grid item className={classes.mathfield}>
             <MathView value={expr} ref={exprInputRef} />
@@ -226,21 +226,37 @@ const Sets = () => {
       <div className={classes.help} hidden={helpOpen}>
         <Divider />
         <Typography variant="h6">Shortcuts:</Typography>
-        <Grid container alignItems="center" justify="center" spacing={2}>
+        <Grid container direction="row" alignItems="center" justify="center" spacing={4}>
           <Grid item>
-            <Typography variant="h6">
-              union: <TeX>\cup</TeX>
-            </Typography>
+            <Grid container direction="column" alignItems="center" justify="center">
+              <Grid item>
+                <Typography variant="h6">Set:</Typography>
+                <Divider />
+              </Grid>
+              <Grid item>
+                <Typography variant="h6">
+                  emptyset: <TeX>\emptyset</TeX>
+                </Typography>
+              </Grid>
+            </Grid>
           </Grid>
           <Grid item>
-            <Typography variant="h6">
-              inverse: <TeX>\cap</TeX>
-            </Typography>
-          </Grid>
-          <Grid item>
-            <Typography variant="h6">
-              emptyset: <TeX>\emptyset</TeX>
-            </Typography>
+            <Grid container direction="column" alignItems="center" justify="center">
+              <Grid item>
+                <Typography variant="h6">Expression:</Typography>
+                <Divider />
+              </Grid>
+              <Grid item>
+                <Typography variant="h6">
+                  union: <TeX>\cup</TeX>
+                </Typography>
+              </Grid>
+              <Grid item>
+                <Typography variant="h6">
+                  inverse: <TeX>\cap</TeX>
+                </Typography>
+              </Grid>
+            </Grid>
           </Grid>
         </Grid>
         <Divider />
