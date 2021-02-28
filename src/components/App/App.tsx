@@ -22,6 +22,7 @@ import Home from "../../pages/Home"
 import { NotificationProvider } from "../NotificationProvider"
 
 const TruthTable = lazy(() => import("../../pages/TruthTable"))
+const Sets = lazy(() => import("../../pages/Sets"))
 
 const drawerWidth = 240
 const useStyles = makeStyles((theme) =>
@@ -107,7 +108,7 @@ export const App = () => {
             <div className={classes.drawerContainer}>
               <List>
                 <ListItemNavLink to="/truthtable" primary="Truth Tables" />
-                {/* <ListItemNavLink to="/setprops" primary="Set Properties" /> */}
+                <ListItemNavLink to="/sets" primary="Sets" />
                 {/* <ListItemNavLink to="/relations" primary="Relations" /> */}
               </List>
             </div>
@@ -126,6 +127,7 @@ export const App = () => {
                 <Switch>
                   <Route exact path="/" component={Home} />
                   <Route path="/truthtable/:initialValue?" component={TruthTable} />
+                  <Route path="/sets/:initialValue?" component={Sets} />
                 </Switch>
               </Suspense>
             </NotificationProvider>
