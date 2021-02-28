@@ -115,9 +115,7 @@ const Sets = () => {
         macros: {},
         inlineShortcuts: {
           uni: "\\cup",
-          union: "\\cup",
-          int: "\\cap",
-          intersect: "\\cap"
+          int: "\\cap"
         },
         onKeystroke: (_sender, _keystroke, e) => {
           if (e.code === "Enter") {
@@ -237,7 +235,7 @@ const Sets = () => {
               </Grid>
               <Grid item>
                 <Typography variant="h6">
-                  emptyset: <TeX>\emptyset</TeX>
+                  emptyset (eset): <TeX>\emptyset</TeX>
                 </Typography>
               </Grid>
             </Grid>
@@ -250,12 +248,12 @@ const Sets = () => {
               </Grid>
               <Grid item>
                 <Typography variant="h6">
-                  union: <TeX>\cup</TeX>
+                  union (uni): <TeX>\cup</TeX>
                 </Typography>
               </Grid>
               <Grid item>
                 <Typography variant="h6">
-                  intersect: <TeX>\cap</TeX>
+                  intersect (int): <TeX>\cap</TeX>
                 </Typography>
               </Grid>
             </Grid>
