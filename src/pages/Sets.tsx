@@ -11,7 +11,6 @@ import {
   Typography
 } from "@material-ui/core"
 import React, { useCallback, useEffect, useMemo, useRef, useState } from "react"
-import { useParams } from "react-router-dom"
 import MathView, { MathViewRef } from "react-math-view"
 import TeX from "@matejmazur/react-katex"
 import { Notification } from "../components/Notification"
@@ -53,7 +52,6 @@ const useStyles = makeStyles((theme) =>
 
 const Sets = () => {
   const classes = useStyles()
-  const { initialValue } = useParams<{ initialValue?: string }>()
   const setInputdRef = useRef<MathViewRef>(null)
   const exprInputRef = useRef<MathViewRef>(null)
   const [sets, setSets] = useState<{ [id: string]: string }>({})
@@ -151,14 +149,6 @@ const Sets = () => {
   const [helpOpen, setHelpOpen] = useState(true)
   const toggleHelp = useCallback(() => setHelpOpen(!helpOpen), [helpOpen])
 
-  const [error, setError] = useState(false)
-  const onError = useCallback((error: Error) => {
-    setError(true)
-    console.error(error)
-    setNotificationData({ message: `Failed to parse proposition. See console for details`, severity: "error" })
-    setNotificationOpen(true)
-  }, [])
-
   const renderSets = useMemo(
     () =>
       Object.keys(sets).map((value) => (
@@ -214,7 +204,7 @@ const Sets = () => {
             <Typography>Operations: </Typography>
           </Grid>
           <Grid item className={classes.mathfield}>
-            <MathView value={""} ref={exprInputRef} />
+            <MathView value={expr} ref={exprInputRef} />
           </Grid>
         </Grid>
         <Grid item className={classes.button}>
