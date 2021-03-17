@@ -1,5 +1,6 @@
+import type { MathfieldOptions } from "mathlive/dist/public/options"
 import { Button, createStyles, Divider, Grid, makeStyles, Typography } from "@material-ui/core"
-import React, { useCallback, useEffect, useRef, useState } from "react"
+import { useCallback, useEffect, useRef, useState } from "react"
 import MathView, { MathViewRef } from "react-math-view"
 import { useParams } from "react-router-dom"
 import TeX from "@matejmazur/react-katex"
@@ -7,6 +8,8 @@ import { LatexTable } from "../components/LatexTable"
 import { Notification } from "../components/Notification"
 import { buildTable } from "../util/buildTable"
 import { Column } from "react-table"
+import { MathfieldElement } from "mathlive"
+import { useMathfieldOptions } from "../util/hooks/useMathfieldOptions"
 
 const useStyles = makeStyles((theme) =>
   createStyles({
@@ -50,10 +53,9 @@ const TruthTable = () => {
     }
   }, [mathfieldRef])
 
-  useEffect(() => {
-    const ref = mathfieldRef.current
-    if (ref) {
-      ref.setOptions({
+  const mathfieldOptions = useCallback(
+    (mathfield: MathfieldElement): Partial<MathfieldOptions> => {
+      return {
         defaultMode: "math",
         smartMode: false,
         smartFence: false,
@@ -77,9 +79,12 @@ const TruthTable = () => {
           }
           return true
         }
-      })
-    }
-  }, [mathfieldRef, process])
+      }
+    },
+    [process]
+  )
+
+  useMathfieldOptions(mathfieldRef, mathfieldOptions)
 
   const [notificationData, setNotificationData] = useState<{
     message: string
