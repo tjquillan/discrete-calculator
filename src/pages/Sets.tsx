@@ -70,9 +70,11 @@ const Sets = () => {
     if (mathfield) {
       const value = mathfield.getValue("latex-expanded")
       const key = value.split("=")[0]
-      const newSets = { ...sets }
-      newSets[key] = value
-      setSets(newSets)
+      if (key) {
+        const newSets = { ...sets }
+        newSets[key] = value
+        setSets(newSets)
+      }
     }
   }, [sets])
 
