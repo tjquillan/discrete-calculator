@@ -1,3 +1,4 @@
+import type { MathfieldOptions } from "mathlive/dist/public/options"
 import {
   Button,
   createStyles,
@@ -10,11 +11,12 @@ import {
   RadioGroup,
   Typography
 } from "@material-ui/core"
-import React, { useCallback, useEffect, useMemo, useRef, useState } from "react"
+import React, { useCallback, useMemo, useRef, useState } from "react"
 import MathView, { MathViewRef } from "react-math-view"
 import TeX from "@matejmazur/react-katex"
 import { Notification } from "../components/Notification"
 import "katex/dist/katex.min.css"
+import { useMathfieldOptions } from "../util/hooks/useMathfieldOptions"
 
 const useStyles = makeStyles((theme) =>
   createStyles({
@@ -85,50 +87,46 @@ const Sets = () => {
     }
   }, [])
 
-  useEffect(() => {
-    const mathfield = setInputRef.current
-    if (mathfield) {
-      mathfield.setOptions({
-        defaultMode: "math",
-        smartMode: false,
-        smartFence: false,
-        macros: {},
-        inlineShortcuts: {
-          eset: "\\emptyset"
-        },
-        onKeystroke: (_sender, _keystroke, e) => {
-          if (e.code === "Enter") {
-            processSet()
-            return false
-          }
-          return true
+  const setMathfieldOptions = useCallback((): Partial<MathfieldOptions> => {
+    return {
+      defaultMode: "math",
+      smartMode: false,
+      smartFence: false,
+      macros: {},
+      inlineShortcuts: {
+        eset: "\\emptyset"
+      },
+      onKeystroke: (_sender, _keystroke, e) => {
+        if (e.code === "Enter") {
+          processSet()
+          return false
         }
-      })
+        return true
+      }
     }
   }, [processSet])
+  useMathfieldOptions(setInputRef, setMathfieldOptions)
 
-  useEffect(() => {
-    const mathfield = exprInputRef.current
-    if (mathfield) {
-      mathfield.setOptions({
-        defaultMode: "math",
-        smartMode: false,
-        smartFence: false,
-        macros: {},
-        inlineShortcuts: {
-          uni: "\\cup",
-          int: "\\cap"
-        },
-        onKeystroke: (_sender, _keystroke, e) => {
-          if (e.code === "Enter") {
-            processExpr()
-            return false
-          }
-          return true
+  const exprMathfieldOptions = useCallback((): Partial<MathfieldOptions> => {
+    return {
+      defaultMode: "math",
+      smartMode: false,
+      smartFence: false,
+      macros: {},
+      inlineShortcuts: {
+        uni: "\\cup",
+        int: "\\cap"
+      },
+      onKeystroke: (_sender, _keystroke, e) => {
+        if (e.code === "Enter") {
+          processExpr()
+          return false
         }
-      })
+        return true
+      }
     }
   }, [processExpr])
+  useMathfieldOptions(exprInputRef, exprMathfieldOptions)
 
   const [notificationData, setNotificationData] = useState<{
     message: string
