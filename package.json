@@ -47,7 +47,7 @@
     "@material-ui/lab": "^4.0.0-alpha.57",
     "asciimath2tex": "^1.1.0",
     "clsx": "^1.1.1",
-    "katex": "^0.13.0",
+    "katex": "^0.13.1",
     "nearley": "^2.20.1",
     "react": "^17.0.2",
     "react-dom": "^17.0.2",
