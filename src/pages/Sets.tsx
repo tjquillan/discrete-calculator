@@ -92,6 +92,11 @@ const Sets = () => {
       defaultMode: "math",
       smartMode: false,
       smartFence: false,
+      // TODO: Remove ignore when types are updated
+      // @ts-ignore
+      plonkSound: null,
+      // @ts-ignore
+      keypressSound: null,
       macros: {},
       inlineShortcuts: {
         eset: "\\emptyset"
@@ -112,6 +117,11 @@ const Sets = () => {
       defaultMode: "math",
       smartMode: false,
       smartFence: false,
+      // TODO: Remove ignore when types are updated
+      // @ts-ignore
+      plonkSound: null,
+      // @ts-ignore
+      keypressSound: null,
       macros: {},
       inlineShortcuts: {
         uni: "\\cup",

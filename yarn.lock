@@ -8244,6 +8244,11 @@ map-visit@^1.0.0:
   dependencies:
     object-visit "^1.0.0"
 
+mathlive@^0.63.0:
+  version "0.63.0"
+  resolved "https://registry.yarnpkg.com/mathlive/-/mathlive-0.63.0.tgz#80e66e9b78c6ae39f6ecba51aaa91751091ba4c1"
+  integrity sha512-LmFPaPoYJjz/AgyhGqm7SenNF8u/H68wmy3MBHa7b8huNMGIHEyZ7I/T/HA5IWQRF775PHcGcN23+EY5MYPHbA==
+
 mathlive@^0.65.0:
   version "0.65.0"
   resolved "https://registry.yarnpkg.com/mathlive/-/mathlive-0.65.0.tgz#df1d92a40abc0e5561e6bc3085bb42b0eb577cf2"
@@ -8511,7 +8516,7 @@ mkdirp@^1.0.3, mkdirp@^1.0.4:
   resolved "https://registry.yarnpkg.com/mkdirp/-/mkdirp-1.0.4.tgz#3eb5ed62622756d79a5f0e2a221dfebad75c2f7e"
   integrity sha512-vVqVZQyf3WLx2Shd0qJ9xuvqgAyKPLAiqITEtqW0oIUjzo3PePDd6fW9iFz30ef7Ysp/oiWqbhszeGWW2T6Gzw==
 
-moo@^0.5.0, moo@^0.5.1:
+moo@^0.5.0:
   version "0.5.1"
   resolved "https://registry.yarnpkg.com/moo/-/moo-0.5.1.tgz#7aae7f384b9b09f620b6abf6f74ebbcd1b65dbc4"
   integrity sha512-I1mnb5xn4fO80BH9BLcF0yLypy2UKl+Cb01Fu0hJRkJjlCRtxZMWkTdAtDd5ZqCOxtCkhmRwyI57vWT+1iZ67w==
