@@ -15,6 +15,7 @@ const lexer = moo.compile({
   subset:     /\\supset /,
   subseteq:   /\\subseteq /,
   nsubseteq:  /\\nsubseteq /,
+  emptyset:   /\\emptyset/,
   difference: /- /,
   lparen:     /\(/,
   rparen:     /\)/,
@@ -34,5 +35,9 @@ operand       ->  operand %union operand        # Union
                |  operand %subseteq operand     # Subset
                |  operand %not %subset operand  # Not Perfect Subset
                |  operand %nsubseteq operand    # Not Subset
+               |  paren
+               |  set
 paren         ->  %lparen setoperation %rparen
+set           ->  %symbol
+               |  %emptyset
 
