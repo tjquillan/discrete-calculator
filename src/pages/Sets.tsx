@@ -1,4 +1,4 @@
-import type { MathfieldOptions } from "mathlive/dist/public/options"
+import type { MathfieldElement } from "mathlive"
 import {
   Button,
   createStyles,
@@ -12,17 +12,16 @@ import {
   Typography
 } from "@material-ui/core"
 import React, { useCallback, useMemo, useRef, useState } from "react"
-import MathView, { MathViewRef } from "react-math-view"
 import TeX from "@matejmazur/react-katex"
 import { Notification } from "../components/Notification"
 import "katex/dist/katex.min.css"
-import { useMathfieldOptions } from "../util/hooks/useMathfieldOptions"
+import { Mathfield } from "../components/Mathfield"
 
-const useStyles = makeStyles((theme) =>
+const useStyles = makeStyles(() =>
   createStyles({
     gridRoot: {
       paddingTop: 10,
-      paddingBottom: 30
+      paddingBottom: 10
     },
     mathfieldContainer: {
       textAlign: "center",
@@ -30,13 +29,7 @@ const useStyles = makeStyles((theme) =>
     },
     mathfield: {
       minWidth: "50%",
-      maxWidth: "75%",
-      fontSize: "32px",
-      textAlign: "center",
-      padding: "8px",
-      borderWidth: 2,
-      borderStyle: "solid",
-      borderColor: theme.palette.divider
+      maxWidth: "75%"
     },
     button: {
       paddingLeft: "10px"
@@ -47,15 +40,36 @@ const useStyles = makeStyles((theme) =>
     help: {
       justifyContent: "center",
       textAlign: "center",
-      paddingBottom: 20
+      paddingBottom: 10
     }
   })
 )
 
+const setMathfieldOptions = {
+  inlineShortcuts: {
+    eset: "\\emptyset"
+  }
+}
+
+const exprMathfieldOptions = {
+  inlineShortcuts: {
+    uni: "\\cup",
+    int: "\\cap",
+    sup: "\\supseteq",
+    nsup: "\\nsupseteq",
+    psup: "\\supset",
+    npsup: "\\not\\supset",
+    sub: "\\subseteq",
+    nsub: "\\nsubseteq",
+    psub: "\\subset",
+    npsub: "\\not\\subset"
+  }
+}
+
 const Sets = () => {
   const classes = useStyles()
-  const setInputRef = useRef<MathViewRef>(null)
-  const exprInputRef = useRef<MathViewRef>(null)
+  const setInputRef = useRef<MathfieldElement>(null)
+  const exprInputRef = useRef<MathfieldElement>(null)
   const [sets, setSets] = useState<{ [id: string]: string }>({})
   const [selectedSet, setSelectedSet] = useState<string>("")
   const [currentSet, setCurrentSet] = useState<string>("")
@@ -86,57 +100,6 @@ const Sets = () => {
       setExpr(mathfield.getValue("latex-expanded"))
     }
   }, [])
-
-  const setMathfieldOptions = useCallback((): Partial<MathfieldOptions> => {
-    return {
-      defaultMode: "math",
-      smartMode: false,
-      smartFence: false,
-      // TODO: Remove ignore when types are updated
-      // @ts-ignore
-      plonkSound: null,
-      // @ts-ignore
-      keypressSound: null,
-      macros: {},
-      inlineShortcuts: {
-        eset: "\\emptyset"
-      },
-      onKeystroke: (_sender, _keystroke, e) => {
-        if (e.code === "Enter") {
-          processSet()
-          return false
-        }
-        return true
-      }
-    }
-  }, [processSet])
-  useMathfieldOptions(setInputRef, setMathfieldOptions)
-
-  const exprMathfieldOptions = useCallback((): Partial<MathfieldOptions> => {
-    return {
-      defaultMode: "math",
-      smartMode: false,
-      smartFence: false,
-      // TODO: Remove ignore when types are updated
-      // @ts-ignore
-      plonkSound: null,
-      // @ts-ignore
-      keypressSound: null,
-      macros: {},
-      inlineShortcuts: {
-        uni: "\\cup",
-        int: "\\cap"
-      },
-      onKeystroke: (_sender, _keystroke, e) => {
-        if (e.code === "Enter") {
-          processExpr()
-          return false
-        }
-        return true
-      }
-    }
-  }, [processExpr])
-  useMathfieldOptions(exprInputRef, exprMathfieldOptions)
 
   const [notificationData, setNotificationData] = useState<{
     message: string
@@ -208,13 +171,13 @@ const Sets = () => {
             <Typography variant="h6">Set: </Typography>
           </Grid>
           <Grid item className={classes.mathfield}>
-            <MathView value={currentSet} ref={setInputRef} />
+            <Mathfield value={currentSet} ref={setInputRef} options={setMathfieldOptions} onEnter={processSet} />
           </Grid>
           <Grid item>
             <Typography variant="h6">Expression: </Typography>
           </Grid>
           <Grid item className={classes.mathfield}>
-            <MathView value={expr} ref={exprInputRef} />
+            <Mathfield value={expr} ref={exprInputRef} options={exprMathfieldOptions} onEnter={processExpr} />
           </Grid>
         </Grid>
         <Grid item className={classes.button}>

@@ -8244,11 +8244,6 @@ map-visit@^1.0.0:
   dependencies:
     object-visit "^1.0.0"
 
-mathlive@^0.63.0:
-  version "0.63.0"
-  resolved "https://registry.yarnpkg.com/mathlive/-/mathlive-0.63.0.tgz#80e66e9b78c6ae39f6ecba51aaa91751091ba4c1"
-  integrity sha512-LmFPaPoYJjz/AgyhGqm7SenNF8u/H68wmy3MBHa7b8huNMGIHEyZ7I/T/HA5IWQRF775PHcGcN23+EY5MYPHbA==
-
 mathlive@^0.65.0:
   version "0.65.0"
   resolved "https://registry.yarnpkg.com/mathlive/-/mathlive-0.65.0.tgz#df1d92a40abc0e5561e6bc3085bb42b0eb577cf2"
