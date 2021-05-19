@@ -42,18 +42,18 @@
   },
   "dependencies": {
     "@matejmazur/react-katex": "^3.1.3",
-    "@material-ui/core": "^4.11.3",
+    "@material-ui/core": "^4.11.4",
     "@material-ui/icons": "^4.11.2",
-    "@material-ui/lab": "^4.0.0-alpha.57",
+    "@material-ui/lab": "^4.0.0-alpha.58",
     "asciimath2tex": "^1.1.0",
     "clsx": "^1.1.1",
-    "katex": "^0.13.1",
+    "katex": "^0.13.11",
     "mathlive": "^0.65.0",
     "nearley": "^2.20.1",
     "react": "^17.0.2",
     "react-dom": "^17.0.2",
     "react-router-dom": "^5.2.0",
-    "react-table": "^7.6.3"
+    "react-table": "^7.7.0"
   },
   "devDependencies": {
     "@testing-library/jest-dom": "^5.11.4",
@@ -62,15 +62,15 @@
     "@types/jest": "^26.0.15",
     "@types/nearley": "^2.11.1",
     "@types/node": "^12.0.0",
-    "@types/react": "^17.0.3",
-    "@types/react-dom": "^17.0.3",
+    "@types/react": "^17.0.6",
+    "@types/react-dom": "^17.0.5",
     "@types/react-router-dom": "^5.1.7",
-    "@types/react-table": "^7.0.29",
+    "@types/react-table": "^7.7.0",
     "create-ts-index": "^1.13.6",
     "husky": "^4",
-    "lint-staged": "^10.5.4",
-    "prettier": "^2.2.1",
+    "lint-staged": "^11.0.0",
+    "prettier": "^2.3.0",
     "react-scripts": "4.0.3",
-    "typescript": "^4.2.3"
+    "typescript": "^4.2.4"
   }
 }
