@@ -1,31 +1,27 @@
+import type { MathfieldElement } from "mathlive"
 import type { MathfieldOptions } from "mathlive/dist/public/options"
 import { Button, createStyles, Divider, Grid, makeStyles, Typography } from "@material-ui/core"
 import { useCallback, useEffect, useRef, useState } from "react"
-import MathView, { MathViewRef } from "react-math-view"
 import { useParams } from "react-router-dom"
 import TeX from "@matejmazur/react-katex"
 import { LatexTable } from "../components/LatexTable"
 import { Notification } from "../components/Notification"
 import { buildTable } from "../util/buildTable"
 import { Column } from "react-table"
-import { MathfieldElement } from "mathlive"
-import { useMathfieldOptions } from "../util/hooks/useMathfieldOptions"
+import { Mathfield } from "../components/Mathfield"
 
 const useStyles = makeStyles((theme) =>
   createStyles({
     gridRoot: {
       paddingTop: 10,
-      paddingBottom: 30
+      paddingBottom: 10
     },
     mathfield: {
       minWidth: "25%",
-      maxWidth: "50%",
-      fontSize: "32px",
-      textAlign: "center",
-      padding: "8px",
-      borderWidth: 2,
-      borderStyle: "solid",
-      borderColor: theme.palette.divider
+      maxWidth: "50%"
+    },
+    buttonContainer: {
+      paddingTop: 10
     },
     button: {
       paddingLeft: "10px"
@@ -36,55 +32,37 @@ const useStyles = makeStyles((theme) =>
     help: {
       justifyContent: "center",
       textAlign: "center",
-      paddingBottom: 20
+      paddingBottom: 10
     }
   })
 )
 
+const mathfieldOptions: Partial<MathfieldOptions> = {
+  inlineShortcuts: {
+    "->": "\\to",
+    "<->": "\\leftrightarrow",
+    iff: "\\leftrightarrow",
+    if: "\\to",
+    implies: "\\to",
+    to: "\\to",
+    not: "\\neg",
+    and: "\\wedge",
+    or: "\\vee",
+    xor: "\\oplus"
+  }
+}
+
 const TruthTable = () => {
   const { initialValue } = useParams<{ initialValue?: string }>()
   const classes = useStyles()
-  const mathfieldRef = useRef<MathViewRef>(null)
+  const mathfieldRef = useRef<MathfieldElement>(null)
   const [value, setValue] = useState<string>(initialValue ? initialValue : "r→q")
 
   const process = useCallback(() => {
     if (mathfieldRef.current) {
-      setValue(mathfieldRef.current.getValue("ASCIIMath"))
+      setValue(mathfieldRef.current.getValue("ascii-math"))
     }
   }, [mathfieldRef])
-
-  const mathfieldOptions = useCallback(
-    (mathfield: MathfieldElement): Partial<MathfieldOptions> => {
-      return {
-        defaultMode: "math",
-        smartMode: false,
-        smartFence: false,
-        macros: {},
-        inlineShortcuts: {
-          "->": "\\to",
-          "<->": "\\leftrightarrow",
-          iff: "\\leftrightarrow",
-          if: "\\to",
-          implies: "\\to",
-          to: "\\to",
-          not: "\\neg",
-          and: "\\wedge",
-          or: "\\vee",
-          xor: "\\oplus"
-        },
-        onKeystroke: (_sender, _keystroke, e) => {
-          if (e.code === "Enter") {
-            process()
-            return false
-          }
-          return true
-        }
-      }
-    },
-    [process]
-  )
-
-  useMathfieldOptions(mathfieldRef, mathfieldOptions)
 
   const [notificationData, setNotificationData] = useState<{
     message: string
@@ -126,24 +104,41 @@ const TruthTable = () => {
 
   return (
     <>
-      <Grid container justify="center" alignItems="center" alignContent="center" className={classes.gridRoot}>
+      <Grid
+        container
+        direction="column"
+        justify="center"
+        alignItems="center"
+        alignContent="center"
+        className={classes.gridRoot}
+      >
         <Grid item className={classes.mathfield}>
-          <MathView value={value} ref={mathfieldRef} />
+          <Mathfield value={value} options={mathfieldOptions} onEnter={process} ref={mathfieldRef} />
         </Grid>
-        <Grid item className={classes.button}>
-          <Button variant="contained" color="primary" onClick={process}>
-            Go
-          </Button>
-        </Grid>
-        <Grid item className={classes.button}>
-          <Button variant="contained" color="primary" onClick={onShareClick}>
-            Share
-          </Button>
-        </Grid>
-        <Grid item className={classes.button}>
-          <Button variant="contained" color="primary" onClick={toggleHelp}>
-            Help
-          </Button>
+        <Grid
+          container
+          item
+          direction="row"
+          justify="center"
+          alignItems="center"
+          alignContent="center"
+          className={classes.buttonContainer}
+        >
+          <Grid item className={classes.button}>
+            <Button variant="contained" color="primary" onClick={process}>
+              Go
+            </Button>
+          </Grid>
+          <Grid item className={classes.button}>
+            <Button variant="contained" color="primary" onClick={onShareClick}>
+              Share
+            </Button>
+          </Grid>
+          <Grid item className={classes.button}>
+            <Button variant="contained" color="primary" onClick={toggleHelp}>
+              Help
+            </Button>
+          </Grid>
         </Grid>
       </Grid>
       <div className={classes.help} hidden={helpOpen}>
