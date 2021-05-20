@@ -256,7 +256,7 @@ const Sets = () => {
           </Grid>
         </Grid>
       </div>
-      <Divider />
+      <Divider hidden={helpOpen && result === undefined} />
       {result ? (
         <Grid
           container
