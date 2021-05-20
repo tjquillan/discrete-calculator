@@ -96,7 +96,7 @@ const Sets = () => {
     if (mathfield) {
       const value = mathfield.getValue("latex-expanded")
       const splitValue = value.split("=")
-      if (splitValue.length >= 2 && splitValue[1]) {
+      if (splitValue.length >= 2 && splitValue[1] && splitValue[0] === splitValue[0].toUpperCase()) {
         const key = splitValue[0]
         const newSets = { ...sets }
         newSets[key] = value
