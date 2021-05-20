@@ -15,16 +15,14 @@ declare var lParen: any
 declare var rParen: any
 
 // eslint-disable-next-line import/first
-import { getNamedSet } from "./ast"
-// eslint-disable-next-line import/first
 import { List, Set } from "immutable"
 
 // eslint-disable-next-line import/first
 import moo from "moo"
 
 const lexer = moo.compile({
-  lBracket: /\\lbrace\s?/,
-  rBracket: /\\rbrace/,
+  lBracket: /\\left\\lbrace\s?/,
+  rBracket: /\\right\\rbrace/,
   lParen: "(",
   rParen: ")",
   comma: ",",
@@ -66,7 +64,7 @@ const grammar: Grammar = {
     {
       name: "assignment",
       symbols: [lexer.has("assignment") ? { type: "assignment" } : assignment, "set"],
-      postprocess: (d) => getNamedSet(d[0], d[1])
+      postprocess: (d) => [d[0].value, d[1]]
     },
     {
       name: "set",

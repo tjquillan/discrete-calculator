@@ -1,4 +1,6 @@
 import type { MathfieldElement } from "mathlive"
+import type { Set } from "immutable"
+import type { SetElement } from "../util/parser/set/ast"
 import {
   Button,
   createStyles,
@@ -16,6 +18,8 @@ import TeX from "@matejmazur/react-katex"
 import { Notification } from "../components/Notification"
 import "katex/dist/katex.min.css"
 import { Mathfield } from "../components/Mathfield"
+import { parseSet } from "../util/parser/set"
+import { evalSetExpression, parseSetExpression } from "../util/parser/setexpression"
 
 const useStyles = makeStyles(() =>
   createStyles({
@@ -130,6 +134,18 @@ const Sets = () => {
     [sets]
   )
 
+  const result = useMemo(() => {
+    if (sets && expr) {
+      const parsedSets = new Map<string, Set<SetElement>>()
+      for (const key of Object.keys(sets)) {
+        const [id, set] = parseSet(sets[key])
+        parsedSets.set(id, set)
+      }
+      const exprAST = parseSetExpression(expr)
+      return evalSetExpression(exprAST, parsedSets)
+    }
+  }, [expr, sets])
+
   return (
     <>
       <Grid
@@ -234,6 +250,7 @@ const Sets = () => {
         </Grid>
         <Divider />
       </div>
+      {result ? <TeX>{result}</TeX> : null}
       <Notification {...notificationData} open={notificationOpen} onClose={onNotificationClose} />
     </>
   )

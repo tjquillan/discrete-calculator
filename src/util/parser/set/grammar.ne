@@ -1,8 +1,6 @@
 @preprocessor typescript
 @{%
 // eslint-disable-next-line import/first
-import {getNamedSet} from './ast'
-// eslint-disable-next-line import/first
 import {List, Set} from 'immutable'
 %}
 
@@ -11,8 +9,8 @@ import {List, Set} from 'immutable'
 import moo from 'moo'
 
 const lexer = moo.compile({
-  lBracket:   /\\lbrace\s?/,
-  rBracket:   /\\rbrace/,
+  lBracket:   /\\left\\lbrace\s?/,
+  rBracket:   /\\right\\rbrace/,
   lParen:     '(',
   rParen:     ')',
   comma:      ',',
@@ -24,7 +22,7 @@ const lexer = moo.compile({
 
 @lexer lexer
 
-assignment  ->  %assignment set                         {% (d) => getNamedSet(d[0], d[1]) %}
+assignment  ->  %assignment set                         {% (d) => [d[0].value, d[1]] %}
 set         ->  %lBracket items %rBracket               {% (d) => Set(d[1]) %}
              |  %emptyset                               {% () => Set() %}
 items       ->  (%comma:? item):*                       {% (d) => d[0].map((i: Array<string>) => i[1]) %}

@@ -7,7 +7,7 @@ import { SetElement } from "./ast"
 const parser = new nearley.Parser(nearley.Grammar.fromCompiled(grammar))
 const BASE_STATE = parser.save()
 
-export function parse(string: string): { [id: string]: Set<SetElement> } {
+export function parseSet(string: string): [string, Set<SetElement>] {
   parser.restore(BASE_STATE)
   parser.feed(string)
   return parser.results[0]
