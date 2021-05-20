@@ -10,7 +10,8 @@ import {
   Toolbar,
   Typography,
   IconButton,
-  CircularProgress
+  CircularProgress,
+  Grid
 } from "@material-ui/core"
 import { BrowserRouter as Router, Link as RouterLink, Route, Switch } from "react-router-dom"
 import { ListItemNavLink } from "../ListItemLink"
@@ -118,10 +119,17 @@ export const App = () => {
             <NotificationProvider>
               <Suspense
                 fallback={
-                  <div className={classes.loading}>
-                    <Typography variant="caption">Loading...</Typography>
+                  <Grid
+                    container
+                    direction="column"
+                    justify="center"
+                    alignContent="center"
+                    alignItems="center"
+                    className={classes.loading}
+                  >
+                    <Typography variant="h6">Loading...</Typography>
                     <CircularProgress />
-                  </div>
+                  </Grid>
                 }
               >
                 <Switch>

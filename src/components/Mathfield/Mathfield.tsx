@@ -2,7 +2,7 @@ import type { MathfieldElement } from "mathlive"
 import type { MathfieldOptions } from "mathlive/dist/public/options"
 import "mathlive/dist/mathlive-fonts.css"
 import "mathlive/dist/mathlive.min"
-import { forwardRef, PropsWithChildren, useEffect, useImperativeHandle, useMemo, useRef, memo } from "react"
+import { forwardRef, useEffect, useImperativeHandle, useMemo, useRef, memo } from "react"
 import { createStyles, makeStyles } from "@material-ui/core"
 import clsx from "clsx"
 
@@ -37,12 +37,12 @@ const useStyles = makeStyles((theme) =>
   })
 )
 
-type MathfieldProps = PropsWithChildren<{
+type MathfieldProps = {
   value?: string
   className?: string
   options?: Partial<MathfieldOptions>
   onEnter?: () => void
-}>
+}
 
 const baseOptions: Partial<MathfieldOptions> = {
   defaultMode: "math",
