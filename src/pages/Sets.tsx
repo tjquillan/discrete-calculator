@@ -95,8 +95,9 @@ const Sets = () => {
     const mathfield = setInputRef.current
     if (mathfield) {
       const value = mathfield.getValue("latex-expanded")
-      const key = value.split("=")[0]
-      if (key) {
+      const splitValue = value.split("=")
+      if (splitValue.length >= 2 && splitValue[1]) {
+        const key = splitValue[0]
         const newSets = { ...sets }
         newSets[key] = value
         setSets(newSets)
