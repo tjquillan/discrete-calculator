@@ -45,6 +45,12 @@ const useStyles = makeStyles(() =>
       justifyContent: "center",
       textAlign: "center",
       paddingBottom: 10
+    },
+    resultContainer: {
+      paddingTop: 10
+    },
+    result: {
+      fontSize: 30
     }
   })
 )
@@ -248,9 +254,27 @@ const Sets = () => {
             </Grid>
           </Grid>
         </Grid>
-        <Divider />
       </div>
-      {result ? <TeX>{result}</TeX> : null}
+      <Divider />
+      {result ? (
+        <Grid
+          container
+          direction="column"
+          justify="center"
+          alignItems="center"
+          alignContent="center"
+          className={classes.resultContainer}
+        >
+          <Grid item>
+            <Typography variant="h4">Result:</Typography>
+          </Grid>
+          <Grid item>
+            <TeX block className={classes.result}>
+              {result}
+            </TeX>
+          </Grid>
+        </Grid>
+      ) : null}
       <Notification {...notificationData} open={notificationOpen} onClose={onNotificationClose} />
     </>
   )
