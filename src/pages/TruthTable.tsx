@@ -5,7 +5,7 @@ import { useCallback, useEffect, useRef, useState } from "react"
 import { useParams } from "react-router-dom"
 import TeX from "@matejmazur/react-katex"
 import { LatexTable } from "../components/LatexTable"
-import { Notification } from "../components/Notification"
+import { useNotificationContext } from "../components/NotificationProvider"
 import { buildTable } from "../util/buildTable"
 import { Column } from "react-table"
 import { Mathfield } from "../components/Mathfield"
@@ -57,6 +57,7 @@ const TruthTable = () => {
   const classes = useStyles()
   const mathfieldRef = useRef<MathfieldElement>(null)
   const [value, setValue] = useState<string>(initialValue ? initialValue : "r→q")
+  const { triggerNotification } = useNotificationContext()
 
   const process = useCallback(() => {
     if (mathfieldRef.current) {
@@ -64,43 +65,25 @@ const TruthTable = () => {
     }
   }, [mathfieldRef])
 
-  const [notificationData, setNotificationData] = useState<{
-    message: string
-    severity: "info" | "success" | "warning" | "error"
-  }>({
-    message: "",
-    severity: "info"
-  })
-  const [notificationOpen, setNotificationOpen] = useState(false)
   const onShareClick = useCallback(() => {
     window.navigator.clipboard.writeText(`${window.location.protocol}//${window.location.host}/truthtable/${value}`)
-    setNotificationData({ message: "Share link copied to clipboard!", severity: "info" })
-    setNotificationOpen(true)
-  }, [value])
-  const onNotificationClose = useCallback(() => {
-    setNotificationOpen(false)
-  }, [])
+    triggerNotification("Share link copied to clipboard!", "info")
+  }, [triggerNotification, value])
 
   const [helpOpen, setHelpOpen] = useState(true)
   const toggleHelp = useCallback(() => setHelpOpen(!helpOpen), [helpOpen])
-
-  const [error, setError] = useState(false)
-  const onError = useCallback((error: Error) => {
-    setError(true)
-    console.error(error)
-    setNotificationData({ message: `Failed to parse proposition. See console for details`, severity: "error" })
-    setNotificationOpen(true)
-  }, [])
 
   const [[columns, data], setColumns] = useState<[Array<Column>, Array<any>]>([[], []])
   useEffect(() => {
     buildTable(value)
       .then((table) => {
         setColumns(table)
-        setError(false)
       })
-      .catch((error) => onError(error))
-  }, [onError, value])
+      .catch((error) => {
+        console.log(error)
+        triggerNotification("Failed to parse proposition. See console for details", "error")
+      })
+  }, [triggerNotification, value])
 
   return (
     <>
@@ -178,8 +161,7 @@ const TruthTable = () => {
         </Grid>
         <Divider />
       </div>
-      <div className={classes.table}>{error ? null : <LatexTable columns={columns} data={data} />}</div>
-      <Notification {...notificationData} open={notificationOpen} onClose={onNotificationClose} />
+      <div className={classes.table}>{columns && data ? <LatexTable columns={columns} data={data} /> : null}</div>
     </>
   )
 }
