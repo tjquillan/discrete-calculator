@@ -13,13 +13,13 @@ import {
   RadioGroup,
   Typography
 } from "@material-ui/core"
-import React, { useCallback, useMemo, useRef, useState } from "react"
+import { useCallback, useEffect, useMemo, useRef, useState } from "react"
 import TeX from "@matejmazur/react-katex"
-import { Notification } from "../components/Notification"
 import "katex/dist/katex.min.css"
 import { Mathfield } from "../components/Mathfield"
 import { parseSet } from "../util/parser/set"
 import { evalSetExpression, parseSetExpression } from "../util/parser/setexpression"
+import { useNotificationContext } from "../components/NotificationProvider"
 
 const useStyles = makeStyles(() =>
   createStyles({
@@ -78,12 +78,14 @@ const exprMathfieldOptions = {
 
 const Sets = () => {
   const classes = useStyles()
+  const { triggerNotification } = useNotificationContext()
   const setInputRef = useRef<MathfieldElement>(null)
   const exprInputRef = useRef<MathfieldElement>(null)
   const [sets, setSets] = useState<{ [id: string]: string }>({})
   const [selectedSet, setSelectedSet] = useState<string>("")
   const [currentSet, setCurrentSet] = useState<string>("")
   const [expr, setExpr] = useState<string>("")
+  const [result, setResult] = useState<string>()
 
   const onRadioSelect = useCallback((event: React.ChangeEvent<HTMLInputElement>) => {
     setSelectedSet(event.target.value)
@@ -112,23 +114,11 @@ const Sets = () => {
     }
   }, [])
 
-  const [notificationData, setNotificationData] = useState<{
-    message: string
-    severity: "info" | "success" | "warning" | "error"
-  }>({
-    message: "",
-    severity: "info"
-  })
-  const [notificationOpen, setNotificationOpen] = useState(false)
   const onShareClick = useCallback(() => {
     // TODO: Implement sharing
-    window.navigator.clipboard.writeText(`${window.location.protocol}//${window.location.host}/sets/`)
-    setNotificationData({ message: "Share link copied to clipboard!", severity: "info" })
-    setNotificationOpen(true)
-  }, [])
-  const onNotificationClose = useCallback(() => {
-    setNotificationOpen(false)
-  }, [])
+    // window.navigator.clipboard.writeText(`${window.location.protocol}//${window.location.host}/sets/`)
+    triggerNotification("Link sharing is not yet implemented.", "warning")
+  }, [triggerNotification])
 
   const [helpOpen, setHelpOpen] = useState(true)
   const toggleHelp = useCallback(() => setHelpOpen(!helpOpen), [helpOpen])
@@ -141,17 +131,28 @@ const Sets = () => {
     [sets]
   )
 
-  const result = useMemo(() => {
+  useEffect(() => {
     if (sets && expr) {
       const parsedSets = new Map<string, Set<SetElement>>()
       for (const key of Object.keys(sets)) {
-        const [id, set] = parseSet(sets[key])
-        parsedSets.set(id, set)
+        try {
+          const [id, set] = parseSet(sets[key])
+          parsedSets.set(id, set)
+        } catch (error) {
+          console.log(error)
+          triggerNotification(`Failed to parse set ${key}! See console for details.`, "error")
+          return
+        }
       }
-      const exprAST = parseSetExpression(expr)
-      return evalSetExpression(exprAST, parsedSets)
+      try {
+        const exprAST = parseSetExpression(expr)
+        setResult(evalSetExpression(exprAST, parsedSets))
+      } catch (error) {
+        console.log(error)
+        triggerNotification(`Failed to parse set expression! See console for details.`, "error")
+      }
     }
-  }, [expr, sets])
+  }, [expr, sets, triggerNotification])
 
   return (
     <>
@@ -276,7 +277,6 @@ const Sets = () => {
           </Grid>
         </Grid>
       ) : null}
-      <Notification {...notificationData} open={notificationOpen} onClose={onNotificationClose} />
     </>
   )
 }
