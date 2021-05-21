@@ -19,6 +19,7 @@ import { useState } from "react"
 import Brightness7Icon from "@material-ui/icons/Brightness7"
 import Brightness4Icon from "@material-ui/icons/Brightness4"
 import Home from "../../pages/Home"
+import { NotificationProvider } from "../NotificationProvider"
 
 const TruthTable = lazy(() => import("../../pages/TruthTable"))
 
@@ -113,19 +114,21 @@ export const App = () => {
           </Drawer>
           <main className={classes.content}>
             <Toolbar />
-            <Suspense
-              fallback={
-                <div className={classes.loading}>
-                  <Typography variant="caption">Loading...</Typography>
-                  <CircularProgress />
-                </div>
-              }
-            >
-              <Switch>
-                <Route exact path="/" component={Home} />
-                <Route path="/truthtable/:initialValue?" component={TruthTable} />
-              </Switch>
-            </Suspense>
+            <NotificationProvider>
+              <Suspense
+                fallback={
+                  <div className={classes.loading}>
+                    <Typography variant="caption">Loading...</Typography>
+                    <CircularProgress />
+                  </div>
+                }
+              >
+                <Switch>
+                  <Route exact path="/" component={Home} />
+                  <Route path="/truthtable/:initialValue?" component={TruthTable} />
+                </Switch>
+              </Suspense>
+            </NotificationProvider>
           </main>
         </Router>
       </div>
