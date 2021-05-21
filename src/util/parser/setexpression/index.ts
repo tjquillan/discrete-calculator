@@ -82,9 +82,7 @@ export function evalSetExpression(exprAST: Node, sets: Sets): string {
         leftNode = evalNode(exprAST.left, sets)
         rightNode = evalNode(exprAST.right, sets)
         return boolToStr(!leftNode.isSubset(rightNode))
-      default:
-        return setToString(evalNode(exprAST, sets))
     }
   }
-  return exprAST
+  return setToString(evalNode(exprAST, sets))
 }
