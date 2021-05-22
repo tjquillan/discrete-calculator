@@ -11,7 +11,6 @@ type Notification = {
 }
 
 type NotificationContext = {
-  notification: Notification | null
   triggerNotification: (message: string, type: NotificationType) => void
   clearNotification: () => void
 }
@@ -43,11 +42,10 @@ export const NotificationProvider = ({ children }: PropsWithChildren<{}>) => {
 
   const contextValue = useMemo<NotificationContext>(() => {
     return {
-      notification,
       triggerNotification,
       clearNotification
     }
-  }, [clearNotification, notification, triggerNotification])
+  }, [clearNotification, triggerNotification])
 
   useEffect(() => {
     setOpen(notification !== null)
