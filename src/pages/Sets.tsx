@@ -17,9 +17,8 @@ import { useCallback, useEffect, useMemo, useRef, useState } from "react"
 import TeX from "@matejmazur/react-katex"
 import "katex/dist/katex.min.css"
 import { Mathfield } from "../components/Mathfield"
-import { parseSet } from "../util/parser/set"
-import { evalSetExpression, parseSetExpression } from "../util/parser/setexpression"
 import { useNotificationContext } from "../components/NotificationProvider"
+import { evalSetExpression, parseSetAssignment, parseSetExpression } from "../util/parser/set"
 
 const useStyles = makeStyles(() =>
   createStyles({
@@ -136,7 +135,7 @@ const Sets = () => {
       const parsedSets = new Map<string, Set<SetElement>>()
       for (const key of Object.keys(sets)) {
         try {
-          const [id, set] = parseSet(sets[key])
+          const [id, set] = parseSetAssignment(sets[key])
           parsedSets.set(id, set)
         } catch (error) {
           console.log(error)

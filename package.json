@@ -10,7 +10,6 @@
     "index": "cti ./src/components/*/",
     "build:grammar:proposition": "nearleyc src/util/parser/proposition/grammar.ne -o src/util/parser/proposition/grammar.ts",
     "build:grammar:set": "nearleyc src/util/parser/set/grammar.ne -o src/util/parser/set/grammar.ts",
-    "build:grammar:setexpression": "nearleyc src/util/parser/setexpression/grammar.ne -o src/util/parser/setexpression/grammar.ts",
     "eject": "react-scripts eject"
   },
   "eslintConfig": {
