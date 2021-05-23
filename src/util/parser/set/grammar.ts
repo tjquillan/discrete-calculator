@@ -18,15 +18,13 @@ declare var nsubseteq: any
 declare var union: any
 declare var intersect: any
 declare var difference: any
-declare var lparen: any
-declare var rparen: any
+declare var lParen: any
+declare var rParen: any
 declare var lBracket: any
 declare var rBracket: any
 declare var emptyset: any
 declare var comma: any
-declare var lParen: any
 declare var symbol: any
-declare var rParen: any
 
 // eslint-disable-next-line import/first
 import moo from "moo"
@@ -48,8 +46,8 @@ const lexer = moo.compile({
   nsubseteq: /\\nsubseteq\b\s?/,
   emptyset: /\\emptyset\b/,
   difference: /-\s?/,
-  lparen: /\(/,
-  rparen: /\)/,
+  lParen: /\(/,
+  rParen: /\)/,
   lBracket: /\\left\\lbrace\s?/,
   rBracket: /\\right\\rbrace/,
   comma: /,/,
@@ -181,9 +179,9 @@ const grammar: Grammar = {
     {
       name: "paren",
       symbols: [
-        lexer.has("lparen") ? { type: "lparen" } : lparen,
+        lexer.has("lParen") ? { type: "lParen" } : lParen,
         "operand",
-        lexer.has("rparen") ? { type: "rparen" } : rparen
+        lexer.has("rParen") ? { type: "rParen" } : rParen
       ],
       postprocess: (d) => d[1]
     },
@@ -212,18 +210,18 @@ const grammar: Grammar = {
     },
     { name: "elements", symbols: ["elements$ebnf$1"], postprocess: (d) => d[0].map((i: Array<string>) => i[1]) },
     { name: "element", symbols: ["symbol"], postprocess: id },
-    { name: "element", symbols: ["set"], postprocess: id },
     { name: "element", symbols: ["tuple"], postprocess: id },
+    { name: "element", symbols: ["set"], postprocess: id },
     {
       name: "tuple",
       symbols: [
         lexer.has("lParen") ? { type: "lParen" } : lParen,
-        lexer.has("symbol") ? { type: "symbol" } : symbol,
+        "symbol",
         lexer.has("comma") ? { type: "comma" } : comma,
-        lexer.has("symbol") ? { type: "symbol" } : symbol,
+        "symbol",
         lexer.has("rParen") ? { type: "rParen" } : rParen
       ],
-      postprocess: (d) => List([d[1].value, d[3].value])
+      postprocess: (d) => List([d[1], d[3]])
     },
     { name: "symbol", symbols: [lexer.has("symbol") ? { type: "symbol" } : symbol], postprocess: (d) => d[0].value },
     {

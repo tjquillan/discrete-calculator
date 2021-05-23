@@ -36,8 +36,8 @@ const lexer = moo.compile({
   nsubseteq:      /\\nsubseteq\b\s?/,
   emptyset:       /\\emptyset\b/,
   difference:     /-\s?/,
-  lparen:         /\(/,
-  rparen:         /\)/,
+  lParen:         /\(/,
+  rParen:         /\)/,
   lBracket:       /\\left\\lbrace\s?/,
   rBracket:       /\\right\\rbrace/,
   comma:          /,/,
@@ -75,15 +75,15 @@ operand           ->  operand %union operand                  {% (d) => createNo
                    |  paren                                   {% id %}
                    |  %setidentifier                          {% (d) => d[0].value %}
                    |  set                                     {% id %}
-paren             ->  %lparen operand %rparen                 {% (d) => d[1] %}
+paren             ->  %lParen operand %rParen                 {% (d) => d[1] %}
 
 # Set Parser
 set               ->  %lBracket elements %rBracket            {% (d) => Set(d[1]) %}
                    |  %emptyset                               {% () => Set() %}
 elements          ->  (%comma:? element):*                    {% (d) => d[0].map((i: Array<string>) => i[1]) %}
 element           ->  symbol                                  {% id %}
-                   |  set                                     {% id %}
                    |  tuple                                   {% id %}
-tuple             ->  %lParen %symbol %comma %symbol %rParen  {% (d) => List([d[1].value, d[3].value]) %}
+                   |  set                                     {% id %}
+tuple             ->  %lParen symbol %comma symbol %rParen    {% (d) => List([d[1], d[3]]) %}
 symbol            ->  %symbol                                 {% (d) => d[0].value %}
                    |  %setidentifier                          {% (d) => d[0].value %}
