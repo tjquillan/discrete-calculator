@@ -81,7 +81,7 @@ const Sets = () => {
   const { triggerNotification } = useNotificationContext()
   const setInputRef = useRef<MathfieldElement>(null)
   const exprInputRef = useRef<MathfieldElement>(null)
-  const [sets, setSets] = useState<{ [id: string]: string }>({})
+  const [sets, setSets] = useState<{ [id: string]: { src: string; set: Set<SetElement> } }>({})
   const [selectedSet, setSelectedSet] = useState<string>("")
   const [currentSet, setCurrentSet] = useState<string>("")
   const [expr, setExpr] = useState<string>("")
@@ -91,21 +91,25 @@ const Sets = () => {
     setSelectedSet(event.target.value)
   }, [])
 
-  const onRadioEditSelect = useCallback(() => setCurrentSet(sets[selectedSet]), [selectedSet, sets])
+  const onRadioEditSelect = useCallback(() => setCurrentSet(sets[selectedSet].src), [selectedSet, sets])
 
   const processSet = useCallback(() => {
     const mathfield = setInputRef.current
     if (mathfield) {
       const value = mathfield.getValue("latex-expanded")
-      const splitValue = value.split("=")
-      if (splitValue.length >= 2 && splitValue[1] && splitValue[0] === splitValue[0].toUpperCase()) {
-        const key = splitValue[0]
-        const newSets = { ...sets }
-        newSets[key] = value
-        setSets(newSets)
+      if (value.charAt(1) === "=") {
+        try {
+          const [id, set] = parseSetAssignment(value)
+          const newSets = { ...sets }
+          newSets[id] = { src: value, set: set }
+          setSets(newSets)
+        } catch (error) {
+          console.log(error.message)
+          triggerNotification(`Failed to parse set ${value.charAt(0)}! See console for details.`, "error")
+        }
       }
     }
-  }, [sets])
+  }, [sets, triggerNotification])
 
   const processExpr = useCallback(() => {
     const mathfield = exprInputRef.current
@@ -126,7 +130,7 @@ const Sets = () => {
   const renderSets = useMemo(
     () =>
       Object.keys(sets).map((value) => (
-        <FormControlLabel key={value} value={value} control={<Radio />} label={<TeX>{sets[value]}</TeX>} />
+        <FormControlLabel key={value} value={value} control={<Radio />} label={<TeX>{sets[value].src}</TeX>} />
       )),
     [sets]
   )
@@ -135,14 +139,7 @@ const Sets = () => {
     if (sets && expr) {
       const parsedSets = new Map<string, Set<SetElement>>()
       for (const key of Object.keys(sets)) {
-        try {
-          const [id, set] = parseSetAssignment(sets[key])
-          parsedSets.set(id, set)
-        } catch (error) {
-          console.log(error)
-          triggerNotification(`Failed to parse set ${key}! See console for details.`, "error")
-          return
-        }
+        parsedSets.set(key, sets[key].set)
       }
       try {
         const exprAST = parseSetExpression(expr)
