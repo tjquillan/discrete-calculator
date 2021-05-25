@@ -29,7 +29,10 @@ export function setToString(element: SetElement): string {
   if (List.isList(element)) {
     return `(${element.toJSON().join(", ")})`
   } else if (Set.isSet(element)) {
-    return element.isEmpty() ? "\\emptyset" : `\\lbrace ${element.toJSON().map(setToString).join(", ")} \\rbrace`
+    const set = element
+      .toJSON()
+      .reduce((prevValue, value) => (prevValue ? `${prevValue}, ${setToString(value)}` : setToString(value)), "")
+    return element.isEmpty() ? "\\emptyset" : `\\lbrace ${set}\\rbrace`
   } else {
     return element
   }
