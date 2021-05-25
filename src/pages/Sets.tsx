@@ -86,6 +86,7 @@ const Sets = () => {
   const [currentSet, setCurrentSet] = useState<string>("")
   const [expr, setExpr] = useState<string>("")
   const [result, setResult] = useState<string>()
+  const [helpOpen, setHelpOpen] = useState(true)
 
   const onRadioSelect = useCallback((event: React.ChangeEvent<HTMLInputElement>) => {
     setSelectedSet(event.target.value)
@@ -124,7 +125,6 @@ const Sets = () => {
     triggerNotification("Link sharing is not yet implemented.", "warning")
   }, [triggerNotification])
 
-  const [helpOpen, setHelpOpen] = useState(true)
   const toggleHelp = useCallback(() => setHelpOpen(!helpOpen), [helpOpen])
 
   const renderSets = useMemo(
