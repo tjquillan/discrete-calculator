@@ -222,7 +222,7 @@ const Sets = () => {
         <Typography variant="h6">Shortcuts:</Typography>
         <Grid container direction="row" alignItems="center" justify="center" spacing={4}>
           <Grid item>
-            <Grid container direction="column" alignItems="center" justify="center">
+            <Grid container direction="row" alignItems="center" justify="center" spacing={2}>
               <Grid item>
                 <Typography variant="h6">Set:</Typography>
                 <Divider />
@@ -235,7 +235,7 @@ const Sets = () => {
             </Grid>
           </Grid>
           <Grid item>
-            <Grid container direction="column" alignItems="center" justify="center">
+            <Grid container direction="row" alignItems="center" justify="center" spacing={2}>
               <Grid item>
                 <Typography variant="h6">Expression:</Typography>
                 <Divider />
