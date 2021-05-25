@@ -209,7 +209,7 @@ const Sets = () => {
           </Button>
         </Grid>
         <Grid item className={classes.button}>
-          <Button variant="contained" color="primary" onClick={onShareClick}>
+          <Button variant="contained" disabled color="primary" onClick={onShareClick}>
             Share
           </Button>
         </Grid>
