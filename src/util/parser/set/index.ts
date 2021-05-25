@@ -27,7 +27,7 @@ export function parseSetExpression(string: string): SetExprNode {
 
 export function setToString(element: SetElement): string {
   if (List.isList(element)) {
-    return `(${element.toJSON().map(toString).join(", ")})`
+    return `(${element.toJSON().join(", ")})`
   } else if (Set.isSet(element)) {
     return element.isEmpty() ? "\\emptyset" : `\\lbrace ${element.toJSON().map(setToString).join(", ")} \\rbrace`
   } else {
