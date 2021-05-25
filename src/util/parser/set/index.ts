@@ -15,12 +15,15 @@ function parse<T>(string: string): T {
 }
 
 export function parseSetAssignment(string: string): [string, Set<SetElement>] {
+  if (string.charAt(1) !== "=") {
+    throw new Error("Set expression was passed instead of an assignment!")
+  }
   return parse(string)
 }
 
 export function parseSetExpression(string: string): SetExprNode {
   if (string.charAt(1) === "=") {
-    throw new Error("Set assignment was passed as expression!")
+    throw new Error("Set assignment was passed instead of an expression!")
   }
   return parse(string)
 }
