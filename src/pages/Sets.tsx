@@ -98,16 +98,14 @@ const Sets = () => {
     const mathfield = setInputRef.current
     if (mathfield) {
       const value = mathfield.getValue("latex-expanded")
-      if (value.charAt(1) === "=") {
-        try {
-          const [id, set] = parseSetAssignment(value)
-          const newSets = { ...sets }
-          newSets[id] = { src: value, set: set }
-          setSets(newSets)
-        } catch (error) {
-          console.log(error.message)
-          triggerNotification(`Failed to parse set ${value.charAt(0)}! See console for details.`, "error")
-        }
+      try {
+        const [id, set] = parseSetAssignment(value)
+        const newSets = { ...sets }
+        newSets[id] = { src: value, set: set }
+        setSets(newSets)
+      } catch (error) {
+        console.log(error.message)
+        triggerNotification(`Failed to parse set ${value.charAt(0)}! See console for details.`, "error")
       }
     }
   }, [sets, triggerNotification])
