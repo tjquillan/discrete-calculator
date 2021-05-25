@@ -25,16 +25,21 @@ export function parseSetExpression(string: string): SetExprNode {
   return parse(string)
 }
 
-export function setToString(element: SetElement): string {
-  if (List.isList(element)) {
-    return `(${element.toJSON().join(", ")})`
-  } else if (Set.isSet(element)) {
-    const set = element
-      .toJSON()
-      .reduce((prevValue, value) => (prevValue ? `${prevValue}, ${setToString(value)}` : setToString(value)), "")
-    return element.isEmpty() ? "\\emptyset" : `\\lbrace ${set}\\rbrace`
-  } else {
+export function elementToString(element: SetElement): string {
+  if (typeof element === "string") {
     return element
+  } else if (Set.isSet(element) && element.isEmpty()) {
+    return "\\emptyset"
+  }
+
+  const children = element
+    .toJSON()
+    .reduce((prevValue, value) => (prevValue ? `${prevValue}, ${elementToString(value)}` : elementToString(value)), "")
+
+  if (List.isList(element)) {
+    return `(${children})`
+  } else {
+    return `\\lbrace ${children}\\rbrace`
   }
 }
 
@@ -110,5 +115,5 @@ export function evalSetExpression(exprAST: SetExprNode, sets: Sets): string {
         return boolToString(!leftNode.isSubset(rightNode))
     }
   }
-  return setToString(evalNode(exprAST, sets))
+  return elementToString(evalNode(exprAST, sets))
 }
