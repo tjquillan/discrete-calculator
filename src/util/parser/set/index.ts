@@ -35,12 +35,7 @@ export function elementToString(element: SetElement): string {
   const children = element
     .toJSON()
     .reduce((prevValue, value) => (prevValue ? `${prevValue}, ${elementToString(value)}` : elementToString(value)), "")
-
-  if (List.isList(element)) {
-    return `(${children})`
-  } else {
-    return `\\lbrace ${children}\\rbrace`
-  }
+  return List.isList(element) ? `(${children})` : `\\lbrace ${children}\\rbrace`
 }
 
 function boolToString(bool: boolean): string {
