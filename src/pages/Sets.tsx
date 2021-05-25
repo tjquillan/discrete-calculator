@@ -62,6 +62,7 @@ const setMathfieldOptions = {
 
 const exprMathfieldOptions = {
   inlineShortcuts: {
+    eset: "\\emptyset",
     uni: "\\cup",
     int: "\\cap",
     sup: "\\supseteq",
@@ -231,7 +232,7 @@ const Sets = () => {
               </Grid>
               <Grid item>
                 <Typography variant="h6">
-                  emptyset (eset): <TeX>\emptyset</TeX>
+                  Empty Set (eset): <TeX>\emptyset</TeX>
                 </Typography>
               </Grid>
             </Grid>
@@ -244,12 +245,57 @@ const Sets = () => {
               </Grid>
               <Grid item>
                 <Typography variant="h6">
-                  union (uni): <TeX>\cup</TeX>
+                  Empty Set (eset): <TeX>\emptyset</TeX>
                 </Typography>
               </Grid>
               <Grid item>
                 <Typography variant="h6">
-                  intersect (int): <TeX>\cap</TeX>
+                  Union (uni): <TeX>\cup</TeX>
+                </Typography>
+              </Grid>
+              <Grid item>
+                <Typography variant="h6">
+                  Intersect (int): <TeX>\cap</TeX>
+                </Typography>
+              </Grid>
+              <Grid item>
+                <Typography variant="h6">
+                  Superset (sup): <TeX>\supseteq</TeX>
+                </Typography>
+              </Grid>
+              <Grid item>
+                <Typography variant="h6">
+                  Not Superset (nsup): <TeX>\nsupseteq</TeX>
+                </Typography>
+              </Grid>
+              <Grid item>
+                <Typography variant="h6">
+                  Perfect Superset (psup): <TeX>\supset</TeX>
+                </Typography>
+              </Grid>
+              <Grid item>
+                <Typography variant="h6">
+                  Not Perfect Superset (npsup): <TeX>\not\supset</TeX>
+                </Typography>
+              </Grid>
+              <Grid item>
+                <Typography variant="h6">
+                  Subset (sub): <TeX>\subseteq</TeX>
+                </Typography>
+              </Grid>
+              <Grid item>
+                <Typography variant="h6">
+                  Not Subset (nsub): <TeX>\nsubseteq</TeX>
+                </Typography>
+              </Grid>
+              <Grid item>
+                <Typography variant="h6">
+                  Perfect Subset (psub): <TeX>\subset</TeX>
+                </Typography>
+              </Grid>
+              <Grid item>
+                <Typography variant="h6">
+                  Not Perfect Subset (npsub): <TeX>\not\subset</TeX>
                 </Typography>
               </Grid>
             </Grid>
