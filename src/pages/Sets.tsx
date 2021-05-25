@@ -218,9 +218,9 @@ const Sets = () => {
       <div className={classes.help} hidden={helpOpen}>
         <Divider />
         <Typography variant="h6">Shortcuts:</Typography>
-        <Grid container direction="row" alignItems="center" justify="center" spacing={4}>
+        <Grid container direction="row" alignItems="center" alignContent="center" justify="center" spacing={4}>
           <Grid item>
-            <Grid container direction="row" alignItems="center" justify="center" spacing={2}>
+            <Grid container direction="row" alignItems="center" alignContent="center" justify="center" spacing={2}>
               <Grid item>
                 <Typography variant="h6">Set:</Typography>
                 <Divider />
@@ -233,7 +233,7 @@ const Sets = () => {
             </Grid>
           </Grid>
           <Grid item>
-            <Grid container direction="row" alignItems="center" justify="center" spacing={2}>
+            <Grid container direction="row" alignItems="center" alignContent="center" justify="center" spacing={2}>
               <Grid item>
                 <Typography variant="h6">Expression:</Typography>
                 <Divider />
