@@ -90,8 +90,8 @@ export const App = () => {
 
   return (
     <ThemeProvider theme={theme}>
+      <CssBaseline />
       <div className={classes.root}>
-        <CssBaseline />
         <Router>
           <AppBar position="fixed" className={classes.appBar}>
             <Toolbar>
