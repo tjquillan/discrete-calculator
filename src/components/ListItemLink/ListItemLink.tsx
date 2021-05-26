@@ -5,7 +5,7 @@
 import { ListItemText } from "@material-ui/core"
 import { ListItem, ListItemIcon } from "@material-ui/core"
 import clsx from "clsx"
-import React, { forwardRef, useMemo } from "react"
+import { forwardRef, useMemo } from "react"
 import {
   Link as RouterLink,
   LinkProps as RouterLinkProps,

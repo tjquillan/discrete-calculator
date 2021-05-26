@@ -1,4 +1,4 @@
-import React, { lazy, Suspense, useCallback, useMemo } from "react"
+import { lazy, Suspense, useCallback, useMemo } from "react"
 import {
   AppBar,
   createStyles,
