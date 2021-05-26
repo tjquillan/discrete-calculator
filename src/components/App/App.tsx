@@ -17,6 +17,7 @@ import { BrowserRouter as Router, Link as RouterLink, Route, Switch } from "reac
 import { ListItemNavLink } from "../ListItemLink"
 import { createMuiTheme, ThemeProvider } from "@material-ui/core/styles"
 import { useState } from "react"
+import MenuIcon from "@material-ui/icons/Menu"
 import Brightness7Icon from "@material-ui/icons/Brightness7"
 import Brightness4Icon from "@material-ui/icons/Brightness4"
 import Home from "../../pages/Home"
@@ -33,6 +34,9 @@ const useStyles = makeStyles((theme) =>
     },
     appBar: {
       zIndex: theme.zIndex.drawer + 1
+    },
+    menuButton: {
+      marginRight: theme.spacing(2)
     },
     drawer: {
       width: drawerWidth,
@@ -65,8 +69,9 @@ const useStyles = makeStyles((theme) =>
 
 export const App = () => {
   const classes = useStyles()
-
   const [darkMode, setDarkMode] = useState(localStorage.getItem("darkMode") === "true")
+  const [drawerOpen, setDrawerOpen] = useState(false)
+
   const toggleDarkMode = useCallback(() => {
     localStorage.setItem("darkMode", `${!darkMode}`)
     setDarkMode(!darkMode)
@@ -81,6 +86,8 @@ export const App = () => {
     [darkMode]
   )
 
+  const toggleDrawer = useCallback(() => setDrawerOpen(!drawerOpen), [drawerOpen])
+
   return (
     <ThemeProvider theme={theme}>
       <div className={classes.root}>
@@ -88,6 +95,15 @@ export const App = () => {
         <Router>
           <AppBar position="fixed" className={classes.appBar}>
             <Toolbar>
+              <IconButton
+                edge="start"
+                onClick={toggleDrawer}
+                className={classes.menuButton}
+                color="inherit"
+                aria-label="open drawer"
+              >
+                <MenuIcon />
+              </IconButton>
               <Typography variant="h6" className={classes.title}>
                 <Link component={RouterLink} to="/" color={"inherit"} className={classes.titleLink}>
                   Discrete Calculator
@@ -99,15 +115,15 @@ export const App = () => {
             </Toolbar>
           </AppBar>
           <Drawer
+            open={drawerOpen}
+            onClose={toggleDrawer}
             className={classes.drawer}
-            variant="permanent"
             classes={{
               paper: classes.drawerPaper
             }}
           >
-            <Toolbar />
             <div className={classes.drawerContainer}>
-              <List>
+              <List onClick={toggleDrawer} onKeyDown={toggleDrawer}>
                 <ListItemNavLink to="/truthtable" primary="Truth Tables" />
                 <ListItemNavLink to="/sets" primary="Sets" />
                 {/* <ListItemNavLink to="/relations" primary="Relations" /> */}
