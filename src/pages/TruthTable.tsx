@@ -56,7 +56,7 @@ const TruthTable = () => {
   const { initialValue } = useParams<{ initialValue?: string }>()
   const classes = useStyles()
   const mathfieldRef = useRef<MathfieldElement>(null)
-  const [value, setValue] = useState<string>(initialValue ? initialValue : "r→q")
+  const [value, setValue] = useState<string>(initialValue || "")
   const { triggerNotification } = useNotificationContext()
 
   const process = useCallback(() => {
@@ -75,14 +75,16 @@ const TruthTable = () => {
 
   const [[columns, data], setColumns] = useState<[Array<Column>, Array<any>]>([[], []])
   useEffect(() => {
-    buildTable(value)
-      .then((table) => {
-        setColumns(table)
-      })
-      .catch((error) => {
-        console.log(error)
-        triggerNotification("Failed to parse proposition. See console for details", "error")
-      })
+    if (value) {
+      buildTable(value)
+        .then((table) => {
+          setColumns(table)
+        })
+        .catch((error) => {
+          console.log(error)
+          triggerNotification("Failed to parse proposition. See console for details", "error")
+        })
+    }
   }, [triggerNotification, value])
 
   return (
