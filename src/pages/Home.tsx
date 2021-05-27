@@ -1,22 +1,15 @@
-import { createStyles, makeStyles, Typography } from "@material-ui/core"
-
-const useStyles = makeStyles((theme) =>
-  createStyles({
-    root: {
-      justifyContent: "center",
-      textAlign: "center"
-    }
-  })
-)
+import { Grid, Typography } from "@material-ui/core"
 
 const Home = () => {
-  const classes = useStyles()
-
   return (
-    <div className={classes.root}>
-      <Typography variant="h1">Discrete Calculator</Typography>
-      <Typography variant="h4">A Calculator for Discrete Mathematics</Typography>
-    </div>
+    <Grid container direction="column" justify="center" alignItems="center" alignContent="center">
+      <Grid item>
+        <Typography variant="h1">Discrete Calculator</Typography>
+      </Grid>
+      <Grid item>
+        <Typography variant="h4" component="div" role="doc-subtitle">A Calculator for Discrete Mathematics</Typography>
+      </Grid>
+    </Grid>
   )
 }
 
