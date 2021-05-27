@@ -50,6 +50,9 @@ const baseOptions: Partial<MathfieldOptions> = {
   smartFence: false,
   plonkSound: null,
   keypressSound: null,
+  virtualKeyboardMode: "auto",
+  virtualKeyboardToolbar: "none",
+  useSharedVirtualKeyboard: false,
   macros: {},
   inlineShortcuts: {}
 }
