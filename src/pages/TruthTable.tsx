@@ -56,17 +56,17 @@ const TruthTable = () => {
   const { initialValue } = useParams<{ initialValue?: string }>()
   const classes = useStyles()
   const mathfieldRef = useRef<MathfieldElement>(null)
-  const [value, setValue] = useState<string>(initialValue || "")
+  const [value, setValue] = useState<string>(initialValue ? decodeURI(initialValue) : "")
   const { triggerNotification } = useNotificationContext()
 
   const process = useCallback(() => {
     if (mathfieldRef.current) {
-      setValue(mathfieldRef.current.getValue("ascii-math"))
+      setValue(mathfieldRef.current.getValue("latex-expanded"))
     }
   }, [mathfieldRef])
 
   const onShareClick = useCallback(() => {
-    window.navigator.clipboard.writeText(`${window.location.protocol}//${window.location.host}/truthtable/${value}`)
+    window.navigator.clipboard.writeText(`${window.location.protocol}//${window.location.host}/truthtable/${encodeURI(value)}`)
     triggerNotification("Share link copied to clipboard!", "info")
   }, [triggerNotification, value])
 
@@ -97,6 +97,11 @@ const TruthTable = () => {
         alignContent="center"
         className={classes.gridRoot}
       >
+        <Grid item>
+          <Typography variant="h6" component="div">
+            Proposition:
+          </Typography>
+        </Grid>
         <Grid item className={classes.mathfield}>
           <Mathfield value={value} options={mathfieldOptions} onSubmit={process} ref={mathfieldRef} />
         </Grid>
@@ -128,35 +133,35 @@ const TruthTable = () => {
       </Grid>
       <div className={classes.help} hidden={helpOpen}>
         <Divider />
-        <Typography variant="h6">Shortcuts:</Typography>
+        <Typography variant="h6" component="div">Shortcuts:</Typography>
         <Grid container alignItems="center" justify="center" spacing={2}>
           <Grid item>
-            <Typography variant="h6">
+            <Typography variant="h6" component="div">
               not: <TeX>\neg</TeX>
             </Typography>
           </Grid>
           <Grid item>
-            <Typography variant="h6">
+            <Typography variant="h6" component="div">
               and: <TeX>\wedge</TeX>
             </Typography>
           </Grid>
           <Grid item>
-            <Typography variant="h6">
+            <Typography variant="h6" component="div">
               or: <TeX>\vee</TeX>
             </Typography>
           </Grid>
           <Grid item>
-            <Typography variant="h6">
+            <Typography variant="h6" component="div">
               xor: <TeX>\oplus</TeX>
             </Typography>
           </Grid>
           <Grid item>
-            <Typography variant="h6">
+            <Typography variant="h6" component="div">
               if: <TeX>\to</TeX>
             </Typography>
           </Grid>
           <Grid item>
-            <Typography variant="h6">
+            <Typography variant="h6" component="div">
               iff: <TeX>\leftrightarrow</TeX>
             </Typography>
           </Grid>

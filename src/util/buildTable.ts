@@ -2,10 +2,6 @@ import { Column } from "react-table"
 import { evaluate, getVars, parse } from "./parser/proposition"
 import { Results } from "./parser/proposition/ast"
 
-// asciimath2tex has no type defintion
-// @ts-ignore 7016
-import AsciiMathParser from "asciimath2tex"
-
 /**
  * Genetates a boolean matrix
  *
@@ -37,7 +33,6 @@ function generateValues(vars: Array<string>) {
 }
 
 export async function buildTable(proposition: string): Promise<[Array<Column>, Array<any>]> {
-  const asciiParser = new AsciiMathParser()
   const columns: Array<Column> = []
   const data = []
 
@@ -51,7 +46,7 @@ export async function buildTable(proposition: string): Promise<[Array<Column>, A
     if (columns.length === 0) {
       for (let key of Object.keys(results)) {
         columns.push({
-          Header: asciiParser.parse(key),
+          Header: key,
           accessor: key
         })
       }
