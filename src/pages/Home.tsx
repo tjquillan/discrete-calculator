@@ -7,7 +7,9 @@ const Home = () => {
         <Typography variant="h1">Discrete Calculator</Typography>
       </Grid>
       <Grid item>
-        <Typography variant="h4" component="div" role="doc-subtitle">A Calculator for Discrete Mathematics</Typography>
+        <Typography variant="h4" component="div" role="doc-subtitle">
+          A Calculator for Discrete Mathematics
+        </Typography>
       </Grid>
     </Grid>
   )
