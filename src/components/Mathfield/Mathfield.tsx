@@ -41,7 +41,7 @@ type MathfieldProps = {
   value?: string
   className?: string
   options?: Partial<MathfieldOptions>
-  onEnter?: () => void
+  onSubmit?: () => void
 }
 
 const baseOptions: Partial<MathfieldOptions> = {
@@ -58,7 +58,7 @@ const baseOptions: Partial<MathfieldOptions> = {
 }
 
 export const Mathfield = memo(
-  forwardRef<MathfieldElement, MathfieldProps>(({ value, className, options, onEnter }, ref) => {
+  forwardRef<MathfieldElement, MathfieldProps>(({ value, className, options, onSubmit }, ref) => {
     const classes = useStyles()
     const internalRef = useRef<MathfieldElement>(null)
     useImperativeHandle(ref, () => internalRef.current!, [internalRef])
@@ -70,21 +70,13 @@ export const Mathfield = memo(
       internalRef.current?.setOptions(mathfieldOptions)
     }, [mathfieldOptions])
 
-    // Apply onKeystroke option (This is seperate because we don't want other settings overwritten when onEnter changes)
     useEffect(() => {
       const mathfield = internalRef.current
-      if (mathfield && onEnter) {
-        mathfield.setOptions({
-          onKeystroke: (_sender, _keystroke, e) => {
-            if (e.code === "Enter" && mathfield.mode !== "latex") {
-              onEnter()
-              return false
-            }
-            return true
-          }
-        })
+      if (onSubmit && mathfield) {
+        mathfield.addEventListener("change", onSubmit)
+        return () => mathfield.removeEventListener("change", onSubmit)
       }
-    }, [onEnter])
+    }, [onSubmit])
 
     useEffect(() => {
       internalRef.current?.setValue(value)

@@ -190,13 +190,13 @@ const Sets = () => {
             <Typography variant="h6">Set: </Typography>
           </Grid>
           <Grid item className={classes.mathfield}>
-            <Mathfield value={currentSet} ref={setInputRef} options={setMathfieldOptions} onEnter={processSet} />
+            <Mathfield value={currentSet} ref={setInputRef} options={setMathfieldOptions} onSubmit={processSet} />
           </Grid>
           <Grid item>
             <Typography variant="h6">Expression: </Typography>
           </Grid>
           <Grid item className={classes.mathfield}>
-            <Mathfield value={expr} ref={exprInputRef} options={exprMathfieldOptions} onEnter={processExpr} />
+            <Mathfield value={expr} ref={exprInputRef} options={exprMathfieldOptions} onSubmit={processExpr} />
           </Grid>
         </Grid>
         <Grid item className={classes.button}>

@@ -98,7 +98,7 @@ const TruthTable = () => {
         className={classes.gridRoot}
       >
         <Grid item className={classes.mathfield}>
-          <Mathfield value={value} options={mathfieldOptions} onEnter={process} ref={mathfieldRef} />
+          <Mathfield value={value} options={mathfieldOptions} onSubmit={process} ref={mathfieldRef} />
         </Grid>
         <Grid
           container
