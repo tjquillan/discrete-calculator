@@ -7,3 +7,4 @@ A site for calculating various things related to Discrete Mathematics
 ## Features
 
 * Truth Table Calculator
+* Set Expression Calculator
