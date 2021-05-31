@@ -66,7 +66,9 @@ const TruthTable = () => {
   }, [mathfieldRef])
 
   const onShareClick = useCallback(() => {
-    window.navigator.clipboard.writeText(`${window.location.protocol}//${window.location.host}/truthtable/${encodeURI(value)}`)
+    window.navigator.clipboard.writeText(
+      `${window.location.protocol}//${window.location.host}/truthtable/${encodeURI(value)}`
+    )
     triggerNotification("Share link copied to clipboard!", "info")
   }, [triggerNotification, value])
 
@@ -133,7 +135,9 @@ const TruthTable = () => {
       </Grid>
       <div className={classes.help} hidden={helpOpen}>
         <Divider />
-        <Typography variant="h6" component="div">Shortcuts:</Typography>
+        <Typography variant="h6" component="div">
+          Shortcuts:
+        </Typography>
         <Grid container alignItems="center" justify="center" spacing={2}>
           <Grid item>
             <Typography variant="h6" component="div">
