@@ -66,37 +66,37 @@ const grammar: Grammar = {
     {
       name: "iff",
       symbols: ["iff", lexer.has("iff") ? { type: "iff" } : iff, "implies"],
-      postprocess: (d) => new Iff(d[1], d[0], d[2])
+      postprocess: (d) => new Iff(d[1].value, d[0], d[2])
     },
     { name: "iff", symbols: ["implies"], postprocess: id },
     {
       name: "implies",
       symbols: ["implies", lexer.has("implies") ? { type: "implies" } : implies, "xor"],
-      postprocess: (d) => new Implies(d[1], d[0], d[2])
+      postprocess: (d) => new Implies(d[1].value, d[0], d[2])
     },
     { name: "implies", symbols: ["xor"], postprocess: id },
     {
       name: "xor",
       symbols: ["xor", lexer.has("xor") ? { type: "xor" } : xor, "or"],
-      postprocess: (d) => new Xor(d[1], d[0], d[2])
+      postprocess: (d) => new Xor(d[1].value, d[0], d[2])
     },
     { name: "xor", symbols: ["or"], postprocess: id },
     {
       name: "or",
       symbols: ["or", lexer.has("or") ? { type: "or" } : or, "and"],
-      postprocess: (d) => new Or(d[1], d[0], d[2])
+      postprocess: (d) => new Or(d[1].value, d[0], d[2])
     },
     { name: "or", symbols: ["and"], postprocess: id },
     {
       name: "and",
       symbols: ["and", lexer.has("and") ? { type: "and" } : and, "not"],
-      postprocess: (d) => new And(d[1], d[0], d[2])
+      postprocess: (d) => new And(d[1].value, d[0], d[2])
     },
     { name: "and", symbols: ["not"], postprocess: id },
     {
       name: "not",
       symbols: [lexer.has("not") ? { type: "not" } : not, "not"],
-      postprocess: (d) => new Not(d[0], d[1], null)
+      postprocess: (d) => new Not(d[0].value, d[1], null)
     },
     { name: "not", symbols: ["paren"], postprocess: id },
     {
