@@ -89,9 +89,7 @@ export const Mathfield = memo(
           style={{
             outline: "none"
           }}
-        >
-          {value}
-        </math-field>
+        />
       </div>
     )
   })
