@@ -50,7 +50,7 @@
     "clsx": "^1.1.1",
     "immutable": "^4.0.0-rc.12",
     "katex": "^0.13.11",
-    "mathlive": "^0.68.0",
+    "mathlive": "^0.69.2",
     "nearley": "^2.20.1",
     "react": "^17.0.2",
     "react-dom": "^17.0.2",
