@@ -154,12 +154,12 @@ const Sets = () => {
       <Grid
         container
         direction="row"
-        justify="center"
+        justifyContent="center"
         alignItems="center"
         alignContent="center"
         className={classes.gridRoot}
       >
-        <Grid container item direction="row" justify="center" alignItems="center" alignContent="center">
+        <Grid container item direction="row" justifyContent="center" alignItems="center" alignContent="center">
           {Object.keys(sets).length !== 0 ? (
             <>
               <Grid item>
@@ -181,7 +181,7 @@ const Sets = () => {
           container
           item
           direction="column"
-          justify="center"
+          justifyContent="center"
           alignItems="center"
           alignContent="center"
           className={classes.mathfieldContainer}
@@ -218,9 +218,9 @@ const Sets = () => {
       <div className={classes.help} hidden={helpOpen}>
         <Divider />
         <Typography variant="h6">Shortcuts:</Typography>
-        <Grid container direction="row" alignItems="center" alignContent="center" justify="center" spacing={4}>
+        <Grid container direction="row" alignItems="center" alignContent="center" justifyContent="center" spacing={4}>
           <Grid item>
-            <Grid container direction="row" alignItems="center" alignContent="center" justify="center" spacing={2}>
+            <Grid container direction="row" alignItems="center" alignContent="center" justifyContent="center" spacing={2}>
               <Grid item>
                 <Typography variant="h6">Set:</Typography>
                 <Divider />
@@ -233,7 +233,7 @@ const Sets = () => {
             </Grid>
           </Grid>
           <Grid item>
-            <Grid container direction="row" alignItems="center" alignContent="center" justify="center" spacing={2}>
+            <Grid container direction="row" alignItems="center" alignContent="center" justifyContent="center" spacing={2}>
               <Grid item>
                 <Typography variant="h6">Expression:</Typography>
                 <Divider />
@@ -302,7 +302,7 @@ const Sets = () => {
         <Grid
           container
           direction="column"
-          justify="center"
+          justifyContent="center"
           alignItems="center"
           alignContent="center"
           className={classes.resultContainer}

@@ -15,7 +15,7 @@ import {
 } from "@material-ui/core"
 import { BrowserRouter as Router, Link as RouterLink, Route, Switch } from "react-router-dom"
 import { ListItemNavLink } from "../ListItemLink"
-import { createMuiTheme, ThemeProvider } from "@material-ui/core/styles"
+import { createTheme, ThemeProvider } from "@material-ui/core/styles"
 import { useState } from "react"
 import MenuIcon from "@material-ui/icons/Menu"
 import Brightness7Icon from "@material-ui/icons/Brightness7"
@@ -78,7 +78,7 @@ export const App = () => {
   }, [darkMode])
   const theme = useMemo(
     () =>
-      createMuiTheme({
+      createTheme({
         palette: {
           type: darkMode ? "dark" : "light"
         }
@@ -138,7 +138,7 @@ export const App = () => {
                   <Grid
                     container
                     direction="column"
-                    justify="center"
+                    justifyContent="center"
                     alignContent="center"
                     alignItems="center"
                     className={classes.loading}

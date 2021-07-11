@@ -94,7 +94,7 @@ const TruthTable = () => {
       <Grid
         container
         direction="column"
-        justify="center"
+        justifyContent="center"
         alignItems="center"
         alignContent="center"
         className={classes.gridRoot}
@@ -111,7 +111,7 @@ const TruthTable = () => {
           container
           item
           direction="row"
-          justify="center"
+          justifyContent="center"
           alignItems="center"
           alignContent="center"
           className={classes.buttonContainer}
@@ -138,7 +138,7 @@ const TruthTable = () => {
         <Typography variant="h6" component="div">
           Shortcuts:
         </Typography>
-        <Grid container alignItems="center" justify="center" spacing={2}>
+        <Grid container alignItems="center" justifyContent="center" spacing={2}>
           <Grid item>
             <Typography variant="h6" component="div">
               not: <TeX>\neg</TeX>
