@@ -15,6 +15,7 @@ declare var nsupseteq: any
 declare var subset: any
 declare var subseteq: any
 declare var nsubseteq: any
+declare var cprod: any
 declare var union: any
 declare var intersect: any
 declare var difference: any
@@ -45,6 +46,7 @@ const lexer = moo.compile({
   subseteq: /\\subseteq\b\s?/,
   nsubseteq: /\\nsubseteq\b\s?/,
   emptyset: /\\emptyset\b/,
+  cprod: /\\times\b\s?/,
   difference: /-\s?/,
   lParen: /\(/,
   rParen: /\)/,
@@ -154,6 +156,11 @@ const grammar: Grammar = {
       postprocess: (d) => createNode("nsubset", d[0], d[2])
     },
     { name: "exclusiveoperand", symbols: ["operand"], postprocess: id },
+    {
+      name: "operand",
+      symbols: ["operand", lexer.has("cprod") ? { type: "cprod" } : cprod, "operand"],
+      postprocess: (d) => createNode("cprod", d[0], d[2])
+    },
     {
       name: "operand",
       symbols: ["operand", lexer.has("union") ? { type: "union" } : union, "operand"],

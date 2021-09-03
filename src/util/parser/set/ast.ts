@@ -1,6 +1,6 @@
 import type { List, Set } from "immutable"
 
-export type SetElement = string | Set<SetElement> | List<string>
+export type SetElement = string | Set<SetElement> | List<SetElement>
 
 export type Node = SetElement | SetExprNode
 

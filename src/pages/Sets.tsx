@@ -62,6 +62,7 @@ const setMathfieldOptions = {
 
 const exprMathfieldOptions = {
   inlineShortcuts: {
+    cprod: "\\times",
     eset: "\\emptyset",
     uni: "\\cup",
     int: "\\cap",

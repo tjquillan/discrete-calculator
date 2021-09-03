@@ -54,6 +54,10 @@ function evalNode(node: Node, sets: Sets): Set<SetElement> {
     const leftNode = evalNode(node.left, sets)
     const rightNode = evalNode(node.right, sets)
     switch (node.id) {
+      case "cprod":
+        return leftNode.reduce<Set<SetElement>>((set, value) => {
+          return set.union(rightNode.map((rValue) => List([value, rValue])))
+        }, Set())
       case "union":
         return leftNode.union(rightNode)
       case "intersect":
