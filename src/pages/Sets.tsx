@@ -104,7 +104,11 @@ const Sets = () => {
         newSets[id] = { src: value, set: set }
         setSets(newSets)
       } catch (error) {
-        console.log(error.message)
+        if (error instanceof Error) {
+          console.log(error.message)
+        } else {
+          console.log(error)
+        }
         triggerNotification(`Failed to parse set ${value.charAt(0)}! See console for details.`, "error")
       }
     }
@@ -220,7 +224,14 @@ const Sets = () => {
         <Typography variant="h6">Shortcuts:</Typography>
         <Grid container direction="row" alignItems="center" alignContent="center" justifyContent="center" spacing={4}>
           <Grid item>
-            <Grid container direction="row" alignItems="center" alignContent="center" justifyContent="center" spacing={2}>
+            <Grid
+              container
+              direction="row"
+              alignItems="center"
+              alignContent="center"
+              justifyContent="center"
+              spacing={2}
+            >
               <Grid item>
                 <Typography variant="h6">Set:</Typography>
                 <Divider />
@@ -233,7 +244,14 @@ const Sets = () => {
             </Grid>
           </Grid>
           <Grid item>
-            <Grid container direction="row" alignItems="center" alignContent="center" justifyContent="center" spacing={2}>
+            <Grid
+              container
+              direction="row"
+              alignItems="center"
+              alignContent="center"
+              justifyContent="center"
+              spacing={2}
+            >
               <Grid item>
                 <Typography variant="h6">Expression:</Typography>
                 <Divider />

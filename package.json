@@ -44,17 +44,17 @@
   "dependencies": {
     "@fontsource/roboto": "^4.5.0",
     "@matejmazur/react-katex": "^3.1.3",
-    "@material-ui/core": "^4.12.1",
+    "@material-ui/core": "^4.12.3",
     "@material-ui/icons": "^4.11.2",
     "@material-ui/lab": "^4.0.0-alpha.60",
     "clsx": "^1.1.1",
     "immutable": "^4.0.0-rc.14",
-    "katex": "^0.13.11",
-    "mathlive": "^0.69.4",
+    "katex": "^0.13.18",
+    "mathlive": "0.69.4",
     "nearley": "^2.20.1",
     "react": "^17.0.2",
     "react-dom": "^17.0.2",
-    "react-router-dom": "^5.2.0",
+    "react-router-dom": "^5.2.1",
     "react-table": "^7.7.0"
   },
   "devDependencies": {
@@ -65,15 +65,15 @@
     "@types/moo": "^0.5.5",
     "@types/nearley": "^2.11.2",
     "@types/node": "^12.0.0",
-    "@types/react": "^17.0.14",
+    "@types/react": "^17.0.19",
     "@types/react-dom": "^17.0.9",
     "@types/react-router-dom": "^5.1.8",
     "@types/react-table": "^7.7.2",
     "create-ts-index": "^1.13.6",
     "husky": "^4",
-    "lint-staged": "^11.0.0",
+    "lint-staged": "^11.1.2",
     "prettier": "^2.3.2",
     "react-scripts": "4.0.3",
-    "typescript": "^4.3.5"
+    "typescript": "^4.4.2"
   }
 }

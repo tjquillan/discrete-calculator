@@ -216,9 +216,9 @@ const grammar: Grammar = {
       name: "tuple",
       symbols: [
         lexer.has("lParen") ? { type: "lParen" } : lParen,
-        "symbol",
+        "element",
         lexer.has("comma") ? { type: "comma" } : comma,
-        "symbol",
+        "element",
         lexer.has("rParen") ? { type: "rParen" } : rParen
       ],
       postprocess: (d) => List([d[1], d[3]])

@@ -84,6 +84,6 @@ elements          ->  (%comma:? element):*                    {% (d) => d[0].map
 element           ->  symbol                                  {% id %}
                    |  tuple                                   {% id %}
                    |  set                                     {% id %}
-tuple             ->  %lParen symbol %comma symbol %rParen    {% (d) => List([d[1], d[3]]) %}
+tuple             ->  %lParen element %comma element %rParen    {% (d) => List([d[1], d[3]]) %}
 symbol            ->  %symbol                                 {% (d) => d[0].value %}
                    |  %setidentifier                          {% (d) => d[0].value %}
