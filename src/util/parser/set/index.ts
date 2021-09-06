@@ -45,6 +45,21 @@ function boolToString(bool: boolean): string {
   return bool ? "True" : "False"
 }
 
+function powerSet(set: Set<SetElement>): Set<SetElement> {
+  let powerSet = Set<SetElement>()
+  const nodeArray = set.toArray()
+  for (let i = 0; i < Math.pow(2, set.size); i++) {
+    let buffer = []
+    for (let j = 0; j < set.size; j++) {
+      if ((i & (1 << j)) > 0) {
+        buffer.push(nodeArray[j])
+      }
+    }
+    powerSet = powerSet.add(Set(buffer))
+  }
+  return powerSet
+}
+
 function evalNode(node: Node, sets: Sets): Set<SetElement> {
   if (List.isList(node)) {
     throw new Error("A list should not be passed to evalNode")
@@ -54,6 +69,8 @@ function evalNode(node: Node, sets: Sets): Set<SetElement> {
     const leftNode = evalNode(node.left, sets)
     const rightNode = evalNode(node.right, sets)
     switch (node.id) {
+      case "pset":
+        return powerSet(leftNode)
       case "cprod":
         return leftNode.reduce<Set<SetElement>>((set, value) => {
           return set.union(rightNode.map((rValue) => List([value, rValue])))

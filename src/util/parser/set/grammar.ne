@@ -35,6 +35,7 @@ const lexer = moo.compile({
   subseteq:       /\\subseteq\b\s?/,
   nsubseteq:      /\\nsubseteq\b\s?/,
   emptyset:       /\\emptyset\b/,
+  pset:           /P\b/,
   cprod:          /\\times\b\s?/,
   difference:     /-\s?/,
   lParen:         /\(/,
@@ -70,7 +71,8 @@ exclusiveoperand  ->  element %elementof operand              {% (d) => createNo
                    |  operand %not %subset operand            {% (d) => createNode("npsubset", d[0], d[2]) %}     # Not Perfect Subset
                    |  operand %nsubseteq operand              {% (d) => createNode("nsubset", d[0], d[2]) %}      # Not Subset
                    |  operand                                 {% id %}
-operand           ->  operand %cprod operand                  {% (d) => createNode("cprod", d[0], d[2]) %}        # Cartesian Product
+operand           ->  %pset paren                             {% (d) => createNode("pset", d[1], d[1]) %}         # Power Set
+                   |  operand %cprod operand                  {% (d) => createNode("cprod", d[0], d[2]) %}        # Cartesian Product
                    |  operand %union operand                  {% (d) => createNode("union", d[0], d[2]) %}        # Union
                    |  operand %intersect operand              {% (d) => createNode("intersect", d[0], d[2]) %}    # Intersection
                    |  operand %difference operand             {% (d) => createNode("difference", d[0], d[2]) %}   # Difference
