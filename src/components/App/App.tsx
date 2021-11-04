@@ -13,7 +13,7 @@ import {
   CircularProgress,
   Grid
 } from "@material-ui/core"
-import { BrowserRouter as Router, Link as RouterLink, Route, Switch } from "react-router-dom"
+import { BrowserRouter as Router, Link as RouterLink, Route, Routes } from "react-router-dom"
 import { ListItemNavLink } from "../ListItemLink"
 import { createTheme, ThemeProvider } from "@material-ui/core/styles"
 import { useState } from "react"
@@ -124,8 +124,8 @@ export const App = () => {
           >
             <div className={classes.drawerContainer}>
               <List onClick={toggleDrawer} onKeyDown={toggleDrawer}>
-                <ListItemNavLink to="/truthtable" primary="Truth Tables" />
-                <ListItemNavLink to="/sets" primary="Sets" />
+                <ListItemNavLink to="truthtable" primary="Truth Tables" />
+                <ListItemNavLink to="sets" primary="Sets" />
                 {/* <ListItemNavLink to="/relations" primary="Relations" /> */}
               </List>
             </div>
@@ -148,11 +148,15 @@ export const App = () => {
                   </Grid>
                 }
               >
-                <Switch>
-                  <Route exact path="/" component={Home} />
-                  <Route path="/truthtable/:initialValue?" component={TruthTable} />
-                  <Route path="/sets/:initialValue?" component={Sets} />
-                </Switch>
+                <Routes>
+                  <Route path="/" element={<Home />} />
+                  <Route path="truthtable" element={<TruthTable />}>
+                    <Route path=":initialValue" />
+                  </Route>
+                  <Route path="sets" element={<Sets />}>
+                    <Route path=":initialValue" />
+                  </Route>
+                </Routes>
               </Suspense>
             </NotificationProvider>
           </main>

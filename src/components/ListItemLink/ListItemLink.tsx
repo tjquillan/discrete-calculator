@@ -48,7 +48,12 @@ export const ListItemNavLink = (props: ListItemNavLinkProps) => {
   const renderNavLink = useMemo(
     () =>
       forwardRef<any, Omit<RouterNavLinkProps, "to">>((itemProps, ref) => (
-        <RouterNavLink to={to} ref={ref} activeClassName={clsx("Mui-selected", activeClassName)} {...itemProps} />
+        <RouterNavLink
+          to={to}
+          ref={ref}
+          className={({ isActive }) => (isActive ? clsx("Mui-selected", activeClassName) : "")}
+          {...itemProps}
+        />
       )),
     [activeClassName, to]
   )

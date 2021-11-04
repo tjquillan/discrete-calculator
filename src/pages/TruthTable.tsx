@@ -53,7 +53,7 @@ const mathfieldOptions: Partial<MathfieldOptions> = {
 }
 
 const TruthTable = () => {
-  const { initialValue } = useParams<{ initialValue?: string }>()
+  const { initialValue } = useParams()
   const classes = useStyles()
   const mathfieldRef = useRef<MathfieldElement>(null)
   const [value, setValue] = useState<string>(initialValue ? decodeURI(initialValue) : "")
