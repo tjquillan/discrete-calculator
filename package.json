@@ -49,7 +49,7 @@
     "@material-ui/lab": "^4.0.0-alpha.60",
     "clsx": "^1.1.1",
     "immutable": "4.0.0",
-    "katex": "^0.13.18",
+    "katex": "^0.15.1",
     "mathlive": "0.69.4",
     "nearley": "^2.20.1",
     "react": "^17.0.2",
@@ -65,15 +65,15 @@
     "@types/moo": "^0.5.5",
     "@types/nearley": "^2.11.2",
     "@types/node": "^12.0.0",
-    "@types/react": "^17.0.27",
-    "@types/react-dom": "^17.0.9",
-    "@types/react-router-dom": "^5.3.1",
-    "@types/react-table": "^7.7.6",
+    "@types/react": "^17.0.34",
+    "@types/react-dom": "^17.0.11",
+    "@types/react-router-dom": "^5.3.2",
+    "@types/react-table": "^7.7.7",
     "create-ts-index": "^1.13.6",
     "husky": "^4",
-    "lint-staged": "^11.2.3",
+    "lint-staged": "^11.2.6",
     "prettier": "^2.4.1",
     "react-scripts": "4.0.3",
-    "typescript": "^4.4.3"
+    "typescript": "^4.4.4"
   }
 }
