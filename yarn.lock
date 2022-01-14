@@ -6117,10 +6117,10 @@ makeerror@1.0.12:
   dependencies:
     tmpl "1.0.5"
 
-mathlive@0.69.4:
-  version "0.69.4"
-  resolved "https://registry.yarnpkg.com/mathlive/-/mathlive-0.69.4.tgz#5ab191073751a9bbf6af0510aceb18030ad8d611"
-  integrity sha512-l14G1XF/PXo0+ztbMMA4eiT9P8SNZYfCOyEhOR8lwzKlr70nbT+t3riipnt5+iGOLAzWIhnOua+7bzeYkE0gRg==
+mathlive@0.69.9:
+  version "0.69.9"
+  resolved "https://registry.yarnpkg.com/mathlive/-/mathlive-0.69.9.tgz#add29b1ba58a770b3daaa67df53eeee68e23b503"
+  integrity sha512-eohJPvxWI5tBOH4XyzzT3+a9ZmZOBuTQZ9PbpJGUV9ROjbHLDRUz2zfoN+ivATp2P8Iv3VRNgtXDUyfnYFURlA==
   dependencies:
     "@cortex-js/compute-engine" "^0.4.2"
 

@@ -47,7 +47,7 @@ type MathfieldProps = {
 const baseOptions: Partial<MathfieldOptions> = {
   defaultMode: "math",
   smartMode: false,
-  smartFence: false,
+  smartFence: true,
   plonkSound: null,
   keypressSound: null,
   virtualKeyboardMode: "auto",
