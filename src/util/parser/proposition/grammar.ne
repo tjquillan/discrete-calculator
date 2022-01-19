@@ -15,8 +15,8 @@ const lexer = moo.compile({
   or:       /\\vee\b\s?/,
   and:      /\\wedge\b\s?/,
   not:      /\\neg\b\s?/,
-  lParen:   /\(\s?/,
-  rParen:   /\)\s?/,
+  lParen:   /\\left\(\s?/,
+  rParen:   /\\right\)\s?/,
   symbol:   /[a-zA-Z]/
 })
 %}
