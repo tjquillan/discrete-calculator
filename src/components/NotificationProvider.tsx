@@ -1,7 +1,7 @@
 import { Snackbar } from "@material-ui/core"
 import { Alert } from "@material-ui/lab"
 import { PropsWithChildren, useCallback, useEffect, useMemo, useState } from "react"
-import { createSafeContext } from "../../util"
+import { createSafeContext } from "../util"
 
 type NotificationType = "success" | "info" | "warning" | "error"
 

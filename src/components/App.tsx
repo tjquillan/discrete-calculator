@@ -14,17 +14,17 @@ import {
   Grid
 } from "@material-ui/core"
 import { BrowserRouter as Router, Link as RouterLink, Route, Routes } from "react-router-dom"
-import { ListItemNavLink } from "../ListItemLink"
+import { ListItemNavLink } from "./ListItemLink"
 import { createTheme, ThemeProvider } from "@material-ui/core/styles"
 import { useState } from "react"
 import MenuIcon from "@material-ui/icons/Menu"
 import Brightness7Icon from "@material-ui/icons/Brightness7"
 import Brightness4Icon from "@material-ui/icons/Brightness4"
-import Home from "../../pages/Home"
-import { NotificationProvider } from "../NotificationProvider"
+import Home from "../pages/Home"
+import { NotificationProvider } from "./NotificationProvider"
 
-const TruthTable = lazy(() => import("../../pages/TruthTable"))
-const Sets = lazy(() => import("../../pages/Sets"))
+const TruthTable = lazy(() => import("../pages/TruthTable"))
+const Sets = lazy(() => import("../pages/Sets"))
 
 const drawerWidth = 240
 const useStyles = makeStyles((theme) =>
