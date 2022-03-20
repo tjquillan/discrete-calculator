@@ -2,7 +2,14 @@ import { Grid, Typography } from "@material-ui/core"
 
 const Home = () => {
   return (
-    <Grid container direction="column" justifyContent="center" alignItems="center" alignContent="center">
+    <Grid
+      component="main"
+      container
+      direction="column"
+      justifyContent="center"
+      alignItems="center"
+      alignContent="center"
+    >
       <Grid item>
         <Typography variant="h1">Discrete Calculator</Typography>
       </Grid>

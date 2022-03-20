@@ -11,30 +11,25 @@ import {
   Typography,
   IconButton,
   CircularProgress,
-  Grid
+  Box,
+  Container
 } from "@material-ui/core"
-import { BrowserRouter as Router, Link as RouterLink, Route, Routes } from "react-router-dom"
+import { Link as RouterLink, Route, Routes } from "react-router-dom"
 import { ListItemNavLink } from "./ListItemLink"
 import { createTheme, ThemeProvider } from "@material-ui/core/styles"
 import { useState } from "react"
 import MenuIcon from "@material-ui/icons/Menu"
 import Brightness7Icon from "@material-ui/icons/Brightness7"
 import Brightness4Icon from "@material-ui/icons/Brightness4"
-import Home from "../pages/Home"
 import { NotificationProvider } from "./NotificationProvider"
 
+const Home = lazy(() => import("../pages/Home"))
 const TruthTable = lazy(() => import("../pages/TruthTable"))
 const Sets = lazy(() => import("../pages/Sets"))
 
 const drawerWidth = 240
 const useStyles = makeStyles((theme) =>
   createStyles({
-    root: {
-      display: "flex"
-    },
-    appBar: {
-      zIndex: theme.zIndex.drawer + 1
-    },
     menuButton: {
       marginRight: theme.spacing(2)
     },
@@ -91,77 +86,63 @@ export const App = () => {
   return (
     <ThemeProvider theme={theme}>
       <CssBaseline />
-      <div className={classes.root}>
-        <Router>
-          <AppBar position="fixed" className={classes.appBar}>
-            <Toolbar>
-              <IconButton
-                edge="start"
-                onClick={toggleDrawer}
-                className={classes.menuButton}
-                color="inherit"
-                aria-label="open drawer"
-              >
-                <MenuIcon />
-              </IconButton>
-              <Typography variant="h6" className={classes.title}>
-                <Link component={RouterLink} to="/" color={"inherit"} className={classes.titleLink}>
-                  Discrete Calculator
-                </Link>
-              </Typography>
-              <IconButton color="inherit" onClick={toggleDarkMode}>
-                {darkMode ? <Brightness4Icon /> : <Brightness7Icon />}
-              </IconButton>
-            </Toolbar>
-          </AppBar>
-          <Drawer
-            open={drawerOpen}
-            onClose={toggleDrawer}
-            className={classes.drawer}
-            classes={{
-              paper: classes.drawerPaper
-            }}
+      <AppBar position="static">
+        <Toolbar>
+          <IconButton
+            edge="start"
+            color="inherit"
+            aria-label="menu"
+            className={classes.menuButton}
+            onClick={toggleDrawer}
           >
-            <div className={classes.drawerContainer}>
-              <List onClick={toggleDrawer} onKeyDown={toggleDrawer}>
-                <ListItemNavLink to="truthtable" primary="Truth Tables" />
-                <ListItemNavLink to="sets" primary="Sets" />
-                {/* <ListItemNavLink to="/relations" primary="Relations" /> */}
-              </List>
-            </div>
-          </Drawer>
-          <main className={classes.content}>
-            <Toolbar />
-            <NotificationProvider>
-              <Suspense
-                fallback={
-                  <Grid
-                    container
-                    direction="column"
-                    justifyContent="center"
-                    alignContent="center"
-                    alignItems="center"
-                    className={classes.loading}
-                  >
-                    <Typography variant="h6">Loading...</Typography>
-                    <CircularProgress />
-                  </Grid>
-                }
-              >
-                <Routes>
-                  <Route path="/" element={<Home />} />
-                  <Route path="truthtable" element={<TruthTable />}>
-                    <Route path=":initialValue" />
-                  </Route>
-                  <Route path="sets" element={<Sets />}>
-                    <Route path=":initialValue" />
-                  </Route>
-                </Routes>
-              </Suspense>
-            </NotificationProvider>
-          </main>
-        </Router>
-      </div>
+            <MenuIcon />
+          </IconButton>
+          <Typography variant="h6" className={classes.title}>
+            <Link component={RouterLink} to="/" color={"inherit"} className={classes.titleLink}>
+              Discrete Calculator
+            </Link>
+          </Typography>
+          <IconButton color="inherit" onClick={toggleDarkMode}>
+            {darkMode ? <Brightness4Icon /> : <Brightness7Icon />}
+          </IconButton>
+        </Toolbar>
+      </AppBar>
+      <Drawer
+        anchor="left"
+        open={drawerOpen}
+        onClose={toggleDrawer}
+        className={classes.drawer}
+        classes={{
+          paper: classes.drawerPaper
+        }}
+      >
+        <Box role="presentation" className={classes.drawerContainer}>
+          <List onClick={toggleDrawer} onKeyDown={toggleDrawer}>
+            <ListItemNavLink to="truthtable" primary="Truth Tables" />
+            <ListItemNavLink to="sets" primary="Sets" />
+          </List>
+        </Box>
+      </Drawer>
+      <NotificationProvider>
+        <Suspense
+          fallback={
+            <Container component="main">
+              <Typography variant="h6">Loading...</Typography>
+              <CircularProgress />
+            </Container>
+          }
+        >
+          <Routes>
+            <Route path="/" element={<Home />} />
+            <Route path="truthtable" element={<TruthTable />}>
+              <Route path=":initialValue" />
+            </Route>
+            <Route path="sets" element={<Sets />}>
+              <Route path=":initialValue" />
+            </Route>
+          </Routes>
+        </Suspense>
+      </NotificationProvider>
     </ThemeProvider>
   )
 }

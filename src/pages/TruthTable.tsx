@@ -1,6 +1,6 @@
 import type { MathfieldElement } from "mathlive"
 import type { MathfieldOptions } from "mathlive/dist/public/options"
-import { Button, createStyles, Divider, Grid, makeStyles, Typography } from "@material-ui/core"
+import { Box, Button, createStyles, Divider, Grid, makeStyles, Typography } from "@material-ui/core"
 import { useCallback, useEffect, useRef, useState } from "react"
 import { useParams } from "react-router-dom"
 import TeX from "@matejmazur/react-katex"
@@ -90,7 +90,7 @@ const TruthTable = () => {
   }, [triggerNotification, value])
 
   return (
-    <>
+    <Box component="main">
       <Grid
         container
         direction="column"
@@ -173,7 +173,7 @@ const TruthTable = () => {
         <Divider />
       </div>
       <div className={classes.table}>{columns && data ? <LatexTable columns={columns} data={data} /> : null}</div>
-    </>
+    </Box>
   )
 }
 

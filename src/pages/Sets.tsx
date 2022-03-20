@@ -2,6 +2,7 @@ import type { MathfieldElement } from "mathlive"
 import type { Set } from "immutable"
 import type { SetElement } from "../util/parser/set/ast"
 import {
+  Box,
   Button,
   createStyles,
   Divider,
@@ -155,7 +156,7 @@ const Sets = () => {
   }, [expr, sets, triggerNotification])
 
   return (
-    <>
+    <Box component="main">
       <Grid
         container
         direction="row"
@@ -336,7 +337,7 @@ const Sets = () => {
           </Grid>
         </Grid>
       ) : null}
-    </>
+    </Box>
   )
 }
 
