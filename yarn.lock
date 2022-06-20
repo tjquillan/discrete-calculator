@@ -5966,10 +5966,10 @@ jss@10.9.0, jss@^10.5.1:
     array-includes "^3.1.3"
     object.assign "^4.1.2"
 
-katex@^0.15.6:
-  version "0.15.6"
-  resolved "https://registry.yarnpkg.com/katex/-/katex-0.15.6.tgz#c4e2f6ced2ac4de1ef6f737fe7c67d3026baa0e5"
-  integrity sha512-UpzJy4yrnqnhXvRPhjEuLA4lcPn6eRngixW7Q3TJErjg3Aw2PuLFBzTkdUb89UtumxjhHTqL3a5GDGETMSwgJA==
+katex@^0.16.0:
+  version "0.16.0"
+  resolved "https://registry.yarnpkg.com/katex/-/katex-0.16.0.tgz#4faff4c905aad0c6010e85901c4d9140efb80a5e"
+  integrity sha512-wPRB4iUPysfH97wTgG5/tRLYxmKVq6Q4jRAWRVOUxXB1dsiv4cvcNjqabHkrOvJHM1Bpk3WrgmllSO1vIvP24w==
   dependencies:
     commander "^8.0.0"
 
@@ -6214,10 +6214,10 @@ makeerror@1.0.12:
   dependencies:
     tmpl "1.0.5"
 
-mathlive@0.73.7:
-  version "0.73.7"
-  resolved "https://registry.yarnpkg.com/mathlive/-/mathlive-0.73.7.tgz#15995be5612763f2646caa46927e328bc00f1457"
-  integrity sha512-nbIaw5lRHJhD9ozeunz9+MRekpa+FqOxKB/ApUBTPShuRMNlTYmiisMsoP+3LnExWxGc/BV3qiSKDhmu/giH7g==
+mathlive@0.74.0:
+  version "0.74.0"
+  resolved "https://registry.yarnpkg.com/mathlive/-/mathlive-0.74.0.tgz#3b107d8c22c8538e932b74186db27c557d1e0c31"
+  integrity sha512-MFwXHMHgfpRRJlNxeruy4XzeH0MBNEbNAB5XyFZWtrmR6SIWPU/4W5dnpgVLDNK5DlbzqfPKArRWRsY+CfQsQQ==
 
 mdn-data@2.0.14:
   version "2.0.14"
